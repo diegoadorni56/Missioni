@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="MISSIONI">
+<title>STELLAR MISSIONS</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600&family=Share+Tech+Mono&display=swap');
+
+  :root {
+    --bg: #020812;
+    --bg2: #060f1e;
+    --bg3: #0a1628;
+    --panel: #0d1f35;
+    --panel2: #112240;
+    --accent: #00d4ff;
+    --accent2: #7b2fff;
+    --accent3: #ff6b35;
+    --gold: #ffd700;
+    --green: #00ff88;
+    --red: #ff3366;
+    --text: #c8e0f4;
+    --text2: #6a8fa8;
+    --text3: #3a5a78;
+    --border: #1a3a5c;
+    --border2: #0f2a44;
+    --glow: 0 0 20px rgba(0,212,255,0.3);
+    --glow2: 0 0 30px rgba(123,47,255,0.4);
+    --glow-gold: 0 0 20px rgba(255,215,0,0.4);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 15px;
+    min-height: 100vh;
+    overflow-x: hidden;
+    padding-bottom: 80px;
+  }
+
+  /* STARFIELD */
+  #starfield {
+    position: fixed; top:0; left:0; width:100%; height:100%;
+    pointer-events: none; z-index: 0; overflow: hidden;
+  }
+  .star {
+    position: absolute; background: white; border-radius: 50%;
+    animation: twinkle linear infinite;
+  }
+  @keyframes twinkle {
+    0%,100% { opacity: 0.1; } 50% { opacity: 0.8; }
+  }
+
+  /* SCANLINES */
+  body::after {
+    content:''; position:fixed; top:0;left:0;right:0;bottom:0;
+    background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px);
+    pointer-events:none; z-index:9999;
+  }
+
+  /* HEADER */
+  .header {
+    position: sticky; top: 0; z-index: 100;
+    background: linear-gradient(180deg, rgba(2,8,18,0.98) 0%, rgba(6,15,30,0.95) 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 16px 10px;
+    backdrop-filter: blur(20px);
+  }
+  .header-top {
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .logo {
+    font-family: 'Orbitron', monospace;
+    font-size: 16px; font-weight: 900;
+    letter-spacing: 3px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    text-shadow: none;
+  }
+  .cycle-badge {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px; color: var(--text2);
+    background: var(--panel); border: 1px solid var(--border);
+    padding: 4px 8px; border-radius: 4px;
+  }
+  .budget-bar {
+    margin-top: 10px;
+    background: var(--panel); border: 1px solid var(--border);
+    border-radius: 6px; padding: 8px 12px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .budget-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px; color: var(--text2); letter-spacing: 1px; white-space: nowrap;
+  }
+  .budget-track {
+    flex: 1; height: 6px; background: var(--bg3);
+    border-radius: 3px; overflow: hidden;
+    border: 1px solid var(--border2);
+  }
+  .budget-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent2), var(--accent));
+    border-radius: 3px;
+    transition: width 0.6s ease;
+    box-shadow: 0 0 8px var(--accent);
+  }
+  .budget-amount {
+    font-family: 'Orbitron', monospace;
+    font-size: 13px; font-weight: 700; color: var(--gold);
+    text-shadow: var(--glow-gold); white-space: nowrap;
+  }
+
+  /* NAV */
+  .nav {
+    position: fixed; bottom: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(2,8,18,0.97);
+    border-top: 1px solid var(--border);
+    display: flex; backdrop-filter: blur(20px);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .nav-btn {
+    flex: 1; padding: 10px 4px 8px; border: none; background: transparent;
+    color: var(--text3); font-family: 'Rajdhani', sans-serif;
+    font-size: 10px; font-weight: 600; letter-spacing: 1px;
+    cursor: pointer; display: flex; flex-direction: column;
+    align-items: center; gap: 3px; transition: color 0.2s;
+    text-transform: uppercase;
+  }
+  .nav-btn .icon { font-size: 18px; }
+  .nav-btn.active { color: var(--accent); }
+  .nav-btn.active .icon { text-shadow: var(--glow); }
+
+  /* VIEWS */
+  .view { display: none; padding: 16px; position: relative; z-index: 1; }
+  .view.active { display: block; }
+
+  /* SECTION TITLE */
+  .section-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 11px; font-weight: 700; letter-spacing: 3px;
+    color: var(--text2); text-transform: uppercase;
+    margin-bottom: 12px; padding-bottom: 6px;
+    border-bottom: 1px solid var(--border2);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .section-title::before {
+    content: ''; display: block; width: 3px; height: 14px;
+    background: var(--accent); border-radius: 2px;
+    box-shadow: var(--glow);
+  }
+
+  /* MISSION CARD */
+  .mission-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px; margin-bottom: 12px;
+    overflow: hidden; transition: border-color 0.2s;
+    position: relative;
+  }
+  .mission-card::before {
+    content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+    width: 3px; border-radius: 10px 0 0 10px;
+  }
+  .mission-card.cat-asp::before { background: var(--accent); box-shadow: var(--glow); }
+  .mission-card.cat-social::before { background: var(--accent2); box-shadow: var(--glow2); }
+  .mission-card.cat-1pct::before { background: var(--green); box-shadow: 0 0 10px rgba(0,255,136,0.4); }
+  .mission-card.completed { opacity: 0.5; border-color: var(--border2); }
+  .mission-card.completed::before { background: var(--text3); box-shadow: none; }
+
+  .mission-header {
+    padding: 12px 14px 10px 16px;
+    display: flex; align-items: flex-start; justify-content: space-between; gap: 8px;
+    cursor: pointer;
+  }
+  .mission-info { flex: 1; min-width: 0; }
+  .mission-name {
+    font-family: 'Orbitron', monospace;
+    font-size: 13px; font-weight: 600; color: var(--text);
+    margin-bottom: 4px; line-height: 1.3;
+  }
+  .mission-meta {
+    display: flex; gap: 6px; flex-wrap: wrap; align-items: center;
+  }
+  .tag {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9px; letter-spacing: 1px; padding: 2px 6px;
+    border-radius: 3px; text-transform: uppercase;
+  }
+  .tag-asp { background: rgba(0,212,255,0.1); color: var(--accent); border: 1px solid rgba(0,212,255,0.2); }
+  .tag-social { background: rgba(123,47,255,0.1); color: var(--accent2); border: 1px solid rgba(123,47,255,0.2); }
+  .tag-1pct { background: rgba(0,255,136,0.1); color: var(--green); border: 1px solid rgba(0,255,136,0.2); }
+  .tag-freq { background: rgba(255,107,53,0.1); color: var(--accent3); border: 1px solid rgba(255,107,53,0.2); }
+
+  .mission-reward {
+    font-family: 'Orbitron', monospace;
+    font-size: 15px; font-weight: 700; color: var(--gold);
+    text-shadow: var(--glow-gold); white-space: nowrap;
+  }
+
+  /* XP BAR */
+  .mission-xp {
+    padding: 0 14px 10px 16px;
+  }
+  .xp-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
+  .xp-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9px; color: var(--text3); letter-spacing: 1px;
+  }
+  .xp-level {
+    font-family: 'Orbitron', monospace;
+    font-size: 11px; font-weight: 700; color: var(--accent);
+  }
+  .xp-track {
+    height: 4px; background: var(--bg3); border-radius: 2px; overflow: hidden;
+  }
+  .xp-fill {
+    height: 100%; border-radius: 2px; transition: width 0.5s ease;
+  }
+  .cat-asp .xp-fill { background: linear-gradient(90deg, #0088aa, var(--accent)); box-shadow: 0 0 6px var(--accent); }
+  .cat-social .xp-fill { background: linear-gradient(90deg, #4a1aaa, var(--accent2)); box-shadow: 0 0 6px var(--accent2); }
+  .cat-1pct .xp-fill { background: linear-gradient(90deg, #00aa55, var(--green)); box-shadow: 0 0 6px var(--green); }
+  .completed .xp-fill { background: var(--text3); box-shadow: none; }
+
+  /* MISSION DETAIL */
+  .mission-detail {
+    display: none; padding: 12px 14px; border-top: 1px solid var(--border2);
+    background: var(--bg2);
+  }
+  .mission-detail.open { display: block; }
+
+  .detail-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 6px 0; border-bottom: 1px solid var(--border2);
+    font-size: 13px;
+  }
+  .detail-row:last-child { border-bottom: none; }
+  .detail-key { color: var(--text2); font-weight: 500; }
+  .detail-val {
+    font-family: 'Share Tech Mono', monospace;
+    color: var(--text); font-size: 12px;
+  }
+
+  .milestones { margin: 10px 0; }
+  .milestone-item {
+    display: flex; align-items: center; gap: 8px;
+    padding: 5px 0; cursor: pointer;
+  }
+  .ms-check {
+    width: 16px; height: 16px; border-radius: 50%;
+    border: 1.5px solid var(--text3); flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; transition: all 0.2s;
+  }
+  .ms-check.done {
+    background: var(--green); border-color: var(--green);
+    box-shadow: 0 0 8px rgba(0,255,136,0.5);
+  }
+  .ms-label { font-size: 13px; color: var(--text); }
+  .ms-label.done { text-decoration: line-through; color: var(--text3); }
+
+  .action-row {
+    display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap;
+  }
+  .btn {
+    font-family: 'Orbitron', monospace;
+    font-size: 9px; font-weight: 700; letter-spacing: 1px;
+    padding: 8px 12px; border-radius: 6px; border: none; cursor: pointer;
+    text-transform: uppercase; transition: all 0.2s;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--accent2), var(--accent));
+    color: white; box-shadow: var(--glow);
+  }
+  .btn-primary:active { transform: scale(0.97); }
+  .btn-secondary {
+    background: transparent; color: var(--accent3);
+    border: 1px solid var(--accent3);
+  }
+  .btn-danger {
+    background: transparent; color: var(--red);
+    border: 1px solid var(--red);
+  }
+  .btn-success {
+    background: linear-gradient(135deg, #00aa55, var(--green));
+    color: var(--bg); box-shadow: 0 0 15px rgba(0,255,136,0.4);
+  }
+  .btn-sm { padding: 5px 8px; font-size: 8px; }
+
+  /* TIMER */
+  .timer-display {
+    background: var(--bg3); border: 1px solid var(--border);
+    border-radius: 8px; padding: 10px 12px; margin: 10px 0;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .timer-digits {
+    font-family: 'Orbitron', monospace;
+    font-size: 22px; font-weight: 700; color: var(--accent);
+    text-shadow: var(--glow); letter-spacing: 2px;
+  }
+  .timer-digits.running { color: var(--green); text-shadow: 0 0 15px rgba(0,255,136,0.6); }
+  .timer-btns { display: flex; gap: 6px; }
+
+  /* MODAL */
+  .modal-overlay {
+    display: none; position: fixed; top:0;left:0;right:0;bottom:0;
+    background: rgba(2,8,18,0.92); z-index: 200;
+    backdrop-filter: blur(10px);
+    align-items: center; justify-content: center; padding: 20px;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: var(--panel2); border: 1px solid var(--border);
+    border-radius: 12px; width: 100%; max-width: 400px;
+    max-height: 85vh; overflow-y: auto;
+    box-shadow: 0 0 60px rgba(0,212,255,0.15);
+  }
+  .modal-header {
+    padding: 16px 16px 12px;
+    border-bottom: 1px solid var(--border);
+    font-family: 'Orbitron', monospace;
+    font-size: 13px; font-weight: 700; letter-spacing: 2px;
+    color: var(--accent); display: flex; justify-content: space-between; align-items: center;
+  }
+  .modal-close {
+    background: none; border: none; color: var(--text3);
+    font-size: 20px; cursor: pointer; padding: 0 4px;
+  }
+  .modal-body { padding: 16px; }
+
+  /* FORM */
+  .form-group { margin-bottom: 14px; }
+  .form-label {
+    display: block; font-family: 'Share Tech Mono', monospace;
+    font-size: 10px; color: var(--text2); letter-spacing: 1px;
+    text-transform: uppercase; margin-bottom: 6px;
+  }
+  .form-input, .form-select, .form-textarea {
+    width: 100%; background: var(--bg3);
+    border: 1px solid var(--border); border-radius: 6px;
+    color: var(--text); font-family: 'Rajdhani', sans-serif;
+    font-size: 15px; padding: 10px 12px;
+    outline: none; transition: border-color 0.2s;
+    -webkit-appearance: none; appearance: none;
+  }
+  .form-input:focus, .form-select:focus, .form-textarea:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 10px rgba(0,212,255,0.15);
+  }
+  .form-textarea { min-height: 70px; resize: vertical; }
+  .form-hint { font-size: 11px; color: var(--text3); margin-top: 4px; }
+
+  .milestone-inputs { display: flex; flex-direction: column; gap: 8px; }
+  .milestone-input-row { display: flex; gap: 6px; align-items: center; }
+  .milestone-input-row .form-input { flex: 1; }
+  .remove-ms { background: none; border: none; color: var(--red); font-size: 18px; cursor: pointer; padding: 4px; }
+
+  /* STATS */
+  .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
+  .stat-card {
+    background: var(--panel); border: 1px solid var(--border);
+    border-radius: 8px; padding: 12px;
+    text-align: center;
+  }
+  .stat-val {
+    font-family: 'Orbitron', monospace;
+    font-size: 20px; font-weight: 700; color: var(--accent);
+    text-shadow: var(--glow);
+  }
+  .stat-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9px; color: var(--text3); letter-spacing: 1px;
+    margin-top: 4px; text-transform: uppercase;
+  }
+
+  /* CYCLE INFO */
+  .cycle-card {
+    background: var(--panel); border: 1px solid var(--border);
+    border-radius: 10px; padding: 14px; margin-bottom: 14px;
+  }
+  .cycle-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 11px; font-weight: 700; color: var(--accent2);
+    letter-spacing: 2px; margin-bottom: 10px;
+  }
+  .cycle-row {
+    display: flex; justify-content: space-between;
+    padding: 5px 0; border-bottom: 1px solid var(--border2);
+    font-size: 13px;
+  }
+  .cycle-row:last-child { border-bottom: none; }
+
+  /* HISTORY */
+  .history-item {
+    background: var(--panel); border: 1px solid var(--border2);
+    border-radius: 8px; padding: 10px 12px; margin-bottom: 8px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .history-name { font-size: 13px; color: var(--text); font-weight: 600; }
+  .history-meta { font-size: 11px; color: var(--text3); margin-top: 2px; font-family: 'Share Tech Mono', monospace; }
+  .history-reward { font-family: 'Orbitron', monospace; font-size: 14px; color: var(--gold); }
+
+  /* TOAST */
+  .toast {
+    position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+    background: var(--panel2); border: 1px solid var(--accent);
+    border-radius: 8px; padding: 10px 18px; z-index: 300;
+    font-family: 'Orbitron', monospace; font-size: 11px;
+    color: var(--accent); box-shadow: var(--glow);
+    animation: toastIn 0.3s ease, toastOut 0.3s ease 2.5s forwards;
+    white-space: nowrap;
+  }
+  @keyframes toastIn { from { opacity:0; top:10px; } to { opacity:1; top:20px; } }
+  @keyframes toastOut { from { opacity:1; } to { opacity:0; } }
+
+  /* UNLOCK ANIMATION */
+  .unlock-overlay {
+    display: none; position: fixed; top:0;left:0;right:0;bottom:0;
+    background: rgba(0,0,0,0.85); z-index: 250;
+    align-items: center; justify-content: center;
+    flex-direction: column; text-align: center;
+  }
+  .unlock-overlay.show { display: flex; }
+  .unlock-icon { font-size: 64px; animation: pulse 0.5s ease infinite alternate; }
+  @keyframes pulse { from { transform: scale(1); } to { transform: scale(1.1); } }
+  .unlock-title {
+    font-family: 'Orbitron', monospace; font-size: 22px; font-weight: 900;
+    color: var(--gold); text-shadow: var(--glow-gold);
+    margin: 16px 0 8px; letter-spacing: 3px;
+  }
+  .unlock-amount {
+    font-family: 'Orbitron', monospace; font-size: 40px; font-weight: 900;
+    color: var(--gold); text-shadow: 0 0 40px rgba(255,215,0,0.8);
+  }
+  .unlock-sub { color: var(--text2); font-size: 14px; margin-top: 8px; }
+  .unlock-close { margin-top: 24px; }
+
+  /* EMPTY STATE */
+  .empty-state {
+    text-align: center; padding: 40px 20px;
+    color: var(--text3);
+  }
+  .empty-state .icon { font-size: 48px; margin-bottom: 12px; }
+  .empty-state p { font-size: 14px; line-height: 1.6; }
+
+  /* FAB */
+  .fab {
+    position: fixed; bottom: 80px; right: 20px; z-index: 99;
+    width: 52px; height: 52px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent2), var(--accent));
+    border: none; color: white; font-size: 24px;
+    box-shadow: 0 4px 20px rgba(0,212,255,0.4), var(--glow);
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    transition: transform 0.2s;
+  }
+  .fab:active { transform: scale(0.93); }
+
+  /* TIME LOG */
+  .time-log-row {
+    display: flex; gap: 8px; align-items: center;
+    padding: 5px 0; border-bottom: 1px solid var(--border2);
+    font-size: 12px;
+  }
+  .time-log-row:last-child { border-bottom: none; }
+  .time-log-date { font-family: 'Share Tech Mono', monospace; color: var(--text3); font-size: 10px; }
+  .time-log-mins { color: var(--accent); font-family: 'Orbitron', monospace; font-size: 12px; }
+
+  /* REWARD PROPOSAL */
+  .proposal-card {
+    background: rgba(255,215,0,0.05); border: 1px solid rgba(255,215,0,0.2);
+    border-radius: 8px; padding: 12px; margin-bottom: 10px;
+    display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  }
+  .proposal-name { font-size: 14px; font-weight: 600; flex: 1; }
+  .proposal-amount {
+    font-family: 'Orbitron', monospace; font-size: 15px; color: var(--gold);
+  }
+  .proposal-input {
+    width: 65px; background: var(--bg3); border: 1px solid var(--border);
+    border-radius: 4px; color: var(--gold); font-family: 'Orbitron', monospace;
+    font-size: 14px; padding: 4px 8px; text-align: center;
+    outline: none;
+  }
+
+  .divider { height: 1px; background: var(--border2); margin: 14px 0; }
+
+  .add-ms-btn {
+    background: none; border: 1px dashed var(--border);
+    color: var(--text3); border-radius: 6px; padding: 6px 12px;
+    font-size: 12px; cursor: pointer; width: 100%; margin-top: 6px;
+    transition: all 0.2s;
+  }
+  .add-ms-btn:active { border-color: var(--accent); color: var(--accent); }
+
+  .reward-total-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 10px 0; font-family: 'Orbitron', monospace;
+    font-size: 12px; color: var(--text2);
+  }
+  .reward-total-val { color: var(--gold); font-size: 16px; }
+  .reward-total-val.over { color: var(--red); }
+
+  select option { background: #0d1f35; }
+
+  .archived-banner {
+    background: rgba(255,51,102,0.08); border: 1px solid rgba(255,51,102,0.2);
+    border-radius: 6px; padding: 8px 12px; margin-bottom: 12px;
+    font-size: 12px; color: var(--red); text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<div id="starfield"></div>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-top">
+    <div class="logo">STELLAR MISSIONS</div>
+    <div class="cycle-badge" id="cycleBadge">CICLO --/-- → --/--</div>
+  </div>
+  <div class="budget-bar">
+    <div class="budget-label">CREDITI</div>
+    <div class="budget-track">
+      <div class="budget-fill" id="budgetFill" style="width:0%"></div>
+    </div>
+    <div class="budget-amount" id="budgetAmount">€0 / €0</div>
+  </div>
+</div>
+
+<!-- VIEWS -->
+<div id="view-missions" class="view active">
+  <div class="section-title">MISSIONI ATTIVE</div>
+  <div id="missionsList"></div>
+  <div class="section-title" style="margin-top:8px">MISSIONI COMPLETATE</div>
+  <div id="missionsCompleted"></div>
+</div>
+
+<div id="view-stats" class="view">
+  <div class="section-title">STATO MISSIONE</div>
+  <div class="stats-grid" id="statsGrid"></div>
+  <div class="section-title">CICLO CORRENTE</div>
+  <div class="cycle-card" id="cycleCard"></div>
+  <div class="section-title">LOG STORICO</div>
+  <div id="historyList"></div>
+</div>
+
+<div id="view-settings" class="view">
+  <div class="section-title">CONFIGURAZIONE</div>
+  <div class="cycle-card">
+    <div class="cycle-title">BUDGET MENSILE</div>
+    <div class="form-group">
+      <label class="form-label">Budget totale (€)</label>
+      <input type="number" class="form-input" id="settingBudget" value="340" min="1">
+    </div>
+    <button class="btn btn-primary" onclick="saveSettings()">SALVA CONFIG</button>
+  </div>
+  <div class="section-title" style="margin-top:8px">DISTRIBUZIONE PREMI</div>
+  <div id="rewardProposals"></div>
+  <div class="reward-total-row">
+    <span>TOTALE ASSEGNATO</span>
+    <span class="reward-total-val" id="rewardTotalVal">€0</span>
+  </div>
+  <button class="btn btn-primary" style="width:100%;margin-top:8px" onclick="saveRewards()">CONFERMA DISTRIBUZIONE</button>
+  <div class="divider"></div>
+  <div class="section-title">DATI</div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap">
+    <button class="btn btn-secondary" onclick="exportData()">ESPORTA JSON</button>
+    <button class="btn btn-danger" onclick="resetConfirm()">RESET TOTALE</button>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <button class="nav-btn active" onclick="showView('missions', this)">
+    <span class="icon">🚀</span>MISSIONI
+  </button>
+  <button class="nav-btn" onclick="showView('stats', this)">
+    <span class="icon">📡</span>STATO
+  </button>
+  <button class="nav-btn" onclick="showView('settings', this)">
+    <span class="icon">⚙️</span>CONFIG
+  </button>
+</nav>
+
+<!-- FAB -->
+<button class="fab" onclick="openNewMission()" title="Nuova missione">＋</button>
+
+<!-- MODAL: NUOVA/MODIFICA MISSIONE -->
+<div class="modal-overlay" id="modalMission">
+  <div class="modal">
+    <div class="modal-header">
+      <span id="modalMissionTitle">NUOVA MISSIONE</span>
+      <button class="modal-close" onclick="closeModal('modalMission')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">Nome Missione</label>
+        <input type="text" class="form-input" id="mName" placeholder="Es. Regolamento ASP">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Categoria</label>
+        <select class="form-select" id="mCat">
+          <option value="asp">🏛 ASP Azalea — Lavoro</option>
+          <option value="social">🌐 Vita Sociale</option>
+          <option value="1pct">⚡ Incremento 1% Quotidiano</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Frequenza</label>
+        <select class="form-select" id="mFreq">
+          <option value="daily">Giornaliero</option>
+          <option value="weekly">Settimanale</option>
+          <option value="multiweek">Plurisettimanale / Progetto</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Descrizione (opzionale)</label>
+        <textarea class="form-textarea" id="mDesc" placeholder="Obiettivo della missione..."></textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Milestone (tappe intermedie)</label>
+        <div class="milestone-inputs" id="milestoneInputs"></div>
+        <button class="add-ms-btn" onclick="addMilestoneInput()">+ Aggiungi tappa</button>
+      </div>
+      <div style="display:flex;gap:8px;margin-top:16px">
+        <button class="btn btn-primary" style="flex:1" onclick="saveMission()">LANCIA MISSIONE</button>
+        <button class="btn btn-danger btn-sm" id="deleteMissionBtn" onclick="deleteMission()" style="display:none">ELIMINA</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: LOG TEMPO -->
+<div class="modal-overlay" id="modalTime">
+  <div class="modal">
+    <div class="modal-header">
+      <span>LOG TEMPO</span>
+      <button class="modal-close" onclick="closeModal('modalTime')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">Missione: <span id="timeModalName" style="color:var(--accent)"></span></label>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Minuti da aggiungere</label>
+        <input type="number" class="form-input" id="timeMinutes" placeholder="Es. 45" min="1">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Data (lascia vuoto = oggi)</label>
+        <input type="date" class="form-input" id="timeDate">
+      </div>
+      <button class="btn btn-primary" style="width:100%;margin-top:8px" onclick="saveTimeLog()">REGISTRA TEMPO</button>
+    </div>
+  </div>
+</div>
+
+<!-- UNLOCK OVERLAY -->
+<div class="unlock-overlay" id="unlockOverlay">
+  <div class="unlock-icon">🏆</div>
+  <div class="unlock-title">MISSIONE COMPLETATA</div>
+  <div id="unlockMissionName" style="color:var(--text2);font-size:16px;font-family:'Orbitron',monospace;letter-spacing:2px"></div>
+  <div class="unlock-amount" id="unlockAmount">+€0</div>
+  <div class="unlock-sub">Crediti sbloccati → Revolut</div>
+  <button class="btn btn-success unlock-close" onclick="closeUnlock()">INCASSA ✓</button>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════
+// STARFIELD
+// ═══════════════════════════════════════════════════════
+(function() {
+  const sf = document.getElementById('starfield');
+  for (let i = 0; i < 80; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    const size = Math.random() * 2 + 0.5;
+    s.style.cssText = `width:${size}px;height:${size}px;left:${Math.random()*100}%;top:${Math.random()*100}%;animation-duration:${2+Math.random()*4}s;animation-delay:${Math.random()*4}s`;
+    sf.appendChild(s);
+  }
+})();
+
+// ═══════════════════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════════════════
+let state = {
+  missions: [],
+  settings: { budget: 340 },
+  history: [],
+  timers: {} // missionId -> { running, startTs, accumulated }
+};
+
+let editingMissionId = null;
+let activeTimerMissionId = null;
+let timerInterval = null;
+
+// ═══════════════════════════════════════════════════════
+// CYCLE LOGIC (27 → 26)
+// ═══════════════════════════════════════════════════════
+function getCycleInfo() {
+  const now = new Date();
+  const day = now.getDate();
+  const month = now.getMonth(); // 0-based
+  const year = now.getFullYear();
+
+  let cycleStart, cycleEnd;
+  if (day >= 27) {
+    cycleStart = new Date(year, month, 27);
+    cycleEnd = new Date(year, month + 1, 26);
+  } else {
+    cycleStart = new Date(year, month - 1, 27);
+    cycleEnd = new Date(year, month, 26);
+  }
+
+  const totalDays = Math.round((cycleEnd - cycleStart) / 86400000) + 1;
+  const elapsed = Math.round((now - cycleStart) / 86400000) + 1;
+  const remaining = totalDays - elapsed + 1;
+  const fraction = Math.min(elapsed / totalDays, 1);
+
+  const fmt = d => `${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}`;
+  return { cycleStart, cycleEnd, totalDays, elapsed, remaining, fraction, fmt,
+    label: `${fmt(cycleStart)} → ${fmt(cycleEnd)}` };
+}
+
+function getProRatedBudget() {
+  const { fraction } = getCycleInfo();
+  return Math.round(state.settings.budget * fraction);
+}
+
+// ═══════════════════════════════════════════════════════
+// PERSIST
+// ═══════════════════════════════════════════════════════
+function save() {
+  try { localStorage.setItem('stellarMissions_v1', JSON.stringify(state)); } catch(e) {}
+}
+function load() {
+  try {
+    const raw = localStorage.getItem('stellarMissions_v1');
+    if (raw) state = JSON.parse(raw);
+    if (!state.missions) state.missions = [];
+    if (!state.settings) state.settings = { budget: 340 };
+    if (!state.history) state.history = [];
+    if (!state.timers) state.timers = {};
+  } catch(e) {}
+}
+
+// ═══════════════════════════════════════════════════════
+// XP & LEVEL
+// ═══════════════════════════════════════════════════════
+function computeXP(mission) {
+  const timeMin = getTotalMinutes(mission.id);
+  const msTotal = (mission.milestones || []).length;
+  const msDone = (mission.milestones || []).filter(m => m.done).length;
+  const completed = mission.completed ? 1 : 0;
+
+  // Weights: time 40%, milestones 40%, completion 20%
+  const timeXP = Math.min(timeMin / (mission.freq === 'daily' ? 30 : mission.freq === 'weekly' ? 120 : 300), 1) * 40;
+  const msXP = msTotal > 0 ? (msDone / msTotal) * 40 : 0;
+  const compXP = completed * 20;
+  const total = timeXP + msXP + compXP;
+  return Math.round(total);
+}
+
+function xpToLevel(xp) {
+  if (xp >= 100) return { level: 'MAX', label: 'COMANDANTE', pct: 100 };
+  if (xp >= 80) return { level: 5, label: 'CAPITANO', pct: (xp-80)/20*100 };
+  if (xp >= 60) return { level: 4, label: 'UFFICIALE', pct: (xp-60)/20*100 };
+  if (xp >= 40) return { level: 3, label: 'ESPLORATORE', pct: (xp-40)/20*100 };
+  if (xp >= 20) return { level: 2, label: 'RECLUTA', pct: (xp-20)/20*100 };
+  return { level: 1, label: 'INIZIATO', pct: xp/20*100 };
+}
+
+// ═══════════════════════════════════════════════════════
+// TIMER
+// ═══════════════════════════════════════════════════════
+function getTotalMinutes(missionId) {
+  const m = state.missions.find(m => m.id === missionId);
+  if (!m) return 0;
+  const logged = (m.timeLogs || []).reduce((s, l) => s + l.minutes, 0);
+  const live = state.timers[missionId];
+  if (live && live.running) {
+    return logged + Math.floor((Date.now() - live.startTs) / 60000);
+  }
+  return logged + (live ? Math.floor(live.accumulated / 60000) : 0);
+}
+
+function formatTime(ms) {
+  const totalSec = Math.floor(ms / 1000);
+  const h = Math.floor(totalSec / 3600);
+  const m = Math.floor((totalSec % 3600) / 60);
+  const s = totalSec % 60;
+  if (h > 0) return `${h}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  return `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+}
+
+function formatMinutes(min) {
+  if (min < 60) return `${min}m`;
+  return `${Math.floor(min/60)}h ${min%60}m`;
+}
+
+function startTimer(missionId) {
+  if (!state.timers[missionId]) state.timers[missionId] = { running: false, startTs: 0, accumulated: 0 };
+  const t = state.timers[missionId];
+  if (t.running) return;
+  t.running = true;
+  t.startTs = Date.now();
+  activeTimerMissionId = missionId;
+  save();
+  tickTimer();
+  timerInterval = setInterval(tickTimer, 1000);
+}
+
+function pauseTimer(missionId) {
+  const t = state.timers[missionId];
+  if (!t || !t.running) return;
+  t.accumulated += Date.now() - t.startTs;
+  t.running = false;
+  clearInterval(timerInterval);
+  // Flush accumulated to timelog
+  const mins = Math.floor(t.accumulated / 60000);
+  if (mins > 0) {
+    const m = state.missions.find(m => m.id === missionId);
+    if (m) {
+      if (!m.timeLogs) m.timeLogs = [];
+      m.timeLogs.push({ date: new Date().toISOString().split('T')[0], minutes: mins, auto: true });
+    }
+    t.accumulated = t.accumulated % 60000;
+  }
+  activeTimerMissionId = null;
+  save();
+  renderAll();
+}
+
+function tickTimer() {
+  if (!activeTimerMissionId) return;
+  const t = state.timers[activeTimerMissionId];
+  if (!t || !t.running) return;
+  const elapsed = Date.now() - t.startTs + t.accumulated;
+  const el = document.querySelector(`[data-timer="${activeTimerMissionId}"]`);
+  if (el) { el.textContent = formatTime(elapsed); el.className = 'timer-digits running'; }
+}
+
+// ═══════════════════════════════════════════════════════
+// REWARD DISTRIBUTION
+// ═══════════════════════════════════════════════════════
+function proposeRewards() {
+  const missions = state.missions;
+  if (!missions.length) return;
+  const budget = state.settings.budget;
+  // Weights per freq
+  const weights = { multiweek: 3, weekly: 1.5, daily: 0.7 };
+  const total = missions.reduce((s, m) => s + (weights[m.freq] || 1), 0);
+  missions.forEach(m => {
+    if (m.reward === undefined || m.reward === null) {
+      m.reward = Math.round((weights[m.freq] || 1) / total * budget);
+    }
+  });
+  // Normalize to budget
+  const sum = missions.reduce((s, m) => s + (m.reward || 0), 0);
+  if (sum !== budget && missions.length > 0) {
+    const diff = budget - sum;
+    missions[0].reward = (missions[0].reward || 0) + diff;
+  }
+  save();
+}
+
+// ═══════════════════════════════════════════════════════
+// RENDER
+// ═══════════════════════════════════════════════════════
+function renderAll() {
+  renderHeader();
+  renderMissions();
+  renderStats();
+  renderSettings();
+}
+
+function renderHeader() {
+  const ci = getCycleInfo();
+  document.getElementById('cycleBadge').textContent = `CICLO ${ci.label}`;
+  const unlocked = state.missions.filter(m => m.completed).reduce((s, m) => s + (m.reward || 0), 0);
+  const proRated = getProRatedBudget();
+  const pct = proRated > 0 ? Math.min(unlocked / proRated * 100, 100) : 0;
+  document.getElementById('budgetFill').style.width = pct + '%';
+  document.getElementById('budgetAmount').textContent = `€${unlocked} / €${proRated}`;
+}
+
+function catClass(cat) {
+  return { asp: 'cat-asp', social: 'cat-social', '1pct': 'cat-1pct' }[cat] || 'cat-asp';
+}
+function catTag(cat) {
+  const map = { asp: ['tag-asp','ASP'], social: ['tag-social','SOCIAL'], '1pct': ['tag-1pct','1%'] };
+  return map[cat] || ['tag-asp','ASP'];
+}
+function freqLabel(f) {
+  return { daily:'GIORNALIERO', weekly:'SETTIMANALE', multiweek:'PROGETTO' }[f] || f;
+}
+
+function renderMissions() {
+  const active = state.missions.filter(m => !m.completed);
+  const done = state.missions.filter(m => m.completed);
+
+  const listEl = document.getElementById('missionsList');
+  const doneEl = document.getElementById('missionsCompleted');
+
+  if (!active.length) {
+    listEl.innerHTML = `<div class="empty-state"><div class="icon">🛸</div><p>Nessuna missione attiva.<br>Premi + per lanciare la tua prima missione.</p></div>`;
+  } else {
+    listEl.innerHTML = active.map(m => missionCardHTML(m)).join('');
+  }
+
+  if (!done.length) {
+    doneEl.innerHTML = `<div style="color:var(--text3);font-size:12px;padding:8px 0">Nessuna missione completata ancora.</div>`;
+  } else {
+    doneEl.innerHTML = done.map(m => missionCardHTML(m)).join('');
+  }
+
+  // Bind toggle
+  document.querySelectorAll('.mission-header').forEach(h => {
+    h.addEventListener('click', function() {
+      const id = this.dataset.id;
+      const detail = document.getElementById('detail-' + id);
+      if (detail) detail.classList.toggle('open');
+    });
+  });
+}
+
+function missionCardHTML(m) {
+  const xp = computeXP(m);
+  const lvl = xpToLevel(xp);
+  const [tagClass, tagLabel] = catTag(m.cat);
+  const totalMin = getTotalMinutes(m.id);
+  const t = state.timers[m.id];
+  const isRunning = t && t.running;
+  const elapsed = isRunning ? Date.now() - t.startTs + t.accumulated : (t ? t.accumulated : 0);
+  const msTotal = (m.milestones || []).length;
+  const msDone = (m.milestones || []).filter(x => x.done).length;
+
+  const msHTML = m.milestones && m.milestones.length ? `
+    <div class="milestones">
+      <div style="font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--text3);letter-spacing:1px;margin-bottom:6px">TAPPE</div>
+      ${m.milestones.map((ms, i) => `
+        <div class="milestone-item" onclick="toggleMilestone('${m.id}',${i})">
+          <div class="ms-check ${ms.done ? 'done' : ''}">✓</div>
+          <div class="ms-label ${ms.done ? 'done' : ''}">${ms.text}</div>
+        </div>
+      `).join('')}
+    </div>
+  ` : '';
+
+  const logsHTML = m.timeLogs && m.timeLogs.length ? `
+    <div style="margin:8px 0">
+      <div style="font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--text3);letter-spacing:1px;margin-bottom:4px">TEMPO REGISTRATO</div>
+      ${m.timeLogs.slice(-3).map(l => `
+        <div class="time-log-row">
+          <span class="time-log-date">${l.date}</span>
+          <span class="time-log-mins">${l.minutes}m</span>
+          <span style="color:var(--text3);font-size:10px">${l.auto ? '⏱ auto' : '✍ manuale'}</span>
+        </div>
+      `).join('')}
+      ${m.timeLogs.length > 3 ? `<div style="font-size:10px;color:var(--text3);margin-top:4px">+ altri ${m.timeLogs.length-3} log</div>` : ''}
+    </div>
+  ` : '';
+
+  return `
+  <div class="mission-card ${catClass(m.cat)} ${m.completed ? 'completed' : ''}">
+    <div class="mission-header" data-id="${m.id}">
+      <div class="mission-info">
+        <div class="mission-name">${m.name}</div>
+        <div class="mission-meta">
+          <span class="tag ${tagClass}">${tagLabel}</span>
+          <span class="tag tag-freq">${freqLabel(m.freq)}</span>
+          ${msTotal > 0 ? `<span style="font-size:10px;color:var(--text3)">${msDone}/${msTotal} tappe</span>` : ''}
+          <span style="font-size:10px;color:var(--text3)">⏱ ${formatMinutes(totalMin)}</span>
+        </div>
+      </div>
+      <div style="text-align:right;flex-shrink:0">
+        <div class="mission-reward">€${m.reward || 0}</div>
+        <div style="font-size:10px;color:var(--text3);margin-top:2px">${m.completed ? '✓ COMPLETATA' : 'LV ' + lvl.level}</div>
+      </div>
+    </div>
+    <div class="mission-xp">
+      <div class="xp-row">
+        <span class="xp-label">${lvl.label} · XP ${xp}/100</span>
+        <span class="xp-level">LV ${lvl.level}</span>
+      </div>
+      <div class="xp-track">
+        <div class="xp-fill" style="width:${lvl.pct}%"></div>
+      </div>
+    </div>
+    <div class="mission-detail" id="detail-${m.id}">
+      ${m.desc ? `<div class="detail-row"><span class="detail-key">Obiettivo</span><span class="detail-val" style="font-family:'Rajdhani',sans-serif;font-size:13px;max-width:60%;text-align:right">${m.desc}</span></div>` : ''}
+      <div class="detail-row">
+        <span class="detail-key">Tempo totale</span>
+        <span class="detail-val">${formatMinutes(totalMin)}</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-key">XP guadagnato</span>
+        <span class="detail-val">${xp} / 100</span>
+      </div>
+      ${msHTML}
+      ${logsHTML}
+
+      ${!m.completed ? `
+      <!-- TIMER -->
+      <div class="timer-display">
+        <div class="timer-digits ${isRunning ? 'running' : ''}" data-timer="${m.id}">${formatTime(elapsed)}</div>
+        <div class="timer-btns">
+          ${isRunning
+            ? `<button class="btn btn-secondary btn-sm" onclick="pauseTimer('${m.id}')">⏸ PAUSA</button>`
+            : `<button class="btn btn-primary btn-sm" onclick="startTimer('${m.id}')">▶ START</button>`
+          }
+        </div>
+      </div>
+      <div class="action-row">
+        <button class="btn btn-secondary btn-sm" onclick="openTimeModal('${m.id}')">+ TEMPO MANUALE</button>
+        <button class="btn btn-success btn-sm" onclick="completeMission('${m.id}')">🏆 COMPLETA</button>
+        <button class="btn btn-danger btn-sm" onclick="editMission('${m.id}')">✎ MODIFICA</button>
+      </div>
+      ` : `
+      <div class="action-row">
+        <button class="btn btn-danger btn-sm" onclick="uncomplete('${m.id}')">↩ RIAPRI</button>
+        <button class="btn btn-danger btn-sm" onclick="deleteMissionById('${m.id}')">🗑 ELIMINA</button>
+      </div>
+      `}
+    </div>
+  </div>`;
+}
+
+function renderStats() {
+  const ci = getCycleInfo();
+  const unlocked = state.missions.filter(m => m.completed).reduce((s, m) => s + (m.reward || 0), 0);
+  const totalMin = state.missions.reduce((s, m) => s + getTotalMinutes(m.id), 0);
+  const active = state.missions.filter(m => !m.completed).length;
+  const done = state.missions.filter(m => m.completed).length;
+
+  document.getElementById('statsGrid').innerHTML = `
+    <div class="stat-card">
+      <div class="stat-val" style="color:var(--gold)">€${unlocked}</div>
+      <div class="stat-label">Crediti Sbloccati</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-val">${formatMinutes(totalMin)}</div>
+      <div class="stat-label">Tempo Totale</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-val" style="color:var(--green)">${done}</div>
+      <div class="stat-label">Missioni OK</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-val" style="color:var(--accent3)">${active}</div>
+      <div class="stat-label">Missioni Attive</div>
+    </div>
+  `;
+
+  document.getElementById('cycleCard').innerHTML = `
+    <div class="cycle-title">CICLO ${ci.label}</div>
+    <div class="cycle-row"><span class="detail-key">Giorni trascorsi</span><span class="detail-val">${ci.elapsed} / ${ci.totalDays}</span></div>
+    <div class="cycle-row"><span class="detail-key">Giorni rimasti</span><span class="detail-val">${ci.remaining}</span></div>
+    <div class="cycle-row"><span class="detail-key">Budget pro-rata</span><span class="detail-val" style="color:var(--gold)">€${getProRatedBudget()}</span></div>
+    <div class="cycle-row"><span class="detail-key">Budget pieno</span><span class="detail-val">€${state.settings.budget}</span></div>
+  `;
+
+  const histEl = document.getElementById('historyList');
+  if (!state.history.length) {
+    histEl.innerHTML = '<div style="color:var(--text3);font-size:12px">Nessuna missione completata ancora.</div>';
+  } else {
+    histEl.innerHTML = state.history.slice().reverse().map(h => `
+      <div class="history-item">
+        <div>
+          <div class="history-name">${h.name}</div>
+          <div class="history-meta">${h.date} · ${h.cycle}</div>
+        </div>
+        <div class="history-reward">+€${h.reward}</div>
+      </div>
+    `).join('');
+  }
+}
+
+function renderSettings() {
+  document.getElementById('settingBudget').value = state.settings.budget;
+  proposeRewards();
+  const propEl = document.getElementById('rewardProposals');
+  if (!state.missions.length) {
+    propEl.innerHTML = '<div style="color:var(--text3);font-size:12px">Aggiungi missioni per distribuire i premi.</div>';
+    return;
+  }
+  propEl.innerHTML = state.missions.map(m => `
+    <div class="proposal-card">
+      <div class="proposal-name">${m.name}<br><span style="font-size:11px;color:var(--text3)">${freqLabel(m.freq)}</span></div>
+      <input class="proposal-input" type="number" min="0" value="${m.reward || 0}" data-mid="${m.id}" onchange="updateRewardProposal('${m.id}', this.value)">
+    </div>
+  `).join('');
+  updateRewardTotal();
+}
+
+function updateRewardProposal(id, val) {
+  const m = state.missions.find(m => m.id === id);
+  if (m) m.reward = parseInt(val) || 0;
+  updateRewardTotal();
+}
+
+function updateRewardTotal() {
+  const total = state.missions.reduce((s, m) => s + (m.reward || 0), 0);
+  const el = document.getElementById('rewardTotalVal');
+  el.textContent = `€${total}`;
+  el.classList.toggle('over', total > state.settings.budget);
+}
+
+// ═══════════════════════════════════════════════════════
+// ACTIONS
+// ═══════════════════════════════════════════════════════
+function showView(name, btn) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('view-' + name).classList.add('active');
+  btn.classList.add('active');
+  if (name === 'stats') renderStats();
+  if (name === 'settings') renderSettings();
+}
+
+function openModal(id) { document.getElementById(id).classList.add('open'); }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+
+function openNewMission() {
+  editingMissionId = null;
+  document.getElementById('modalMissionTitle').textContent = 'NUOVA MISSIONE';
+  document.getElementById('mName').value = '';
+  document.getElementById('mCat').value = 'asp';
+  document.getElementById('mFreq').value = 'multiweek';
+  document.getElementById('mDesc').value = '';
+  document.getElementById('milestoneInputs').innerHTML = '';
+  document.getElementById('deleteMissionBtn').style.display = 'none';
+  openModal('modalMission');
+}
+
+function editMission(id) {
+  const m = state.missions.find(m => m.id === id);
+  if (!m) return;
+  editingMissionId = id;
+  document.getElementById('modalMissionTitle').textContent = 'MODIFICA MISSIONE';
+  document.getElementById('mName').value = m.name;
+  document.getElementById('mCat').value = m.cat;
+  document.getElementById('mFreq').value = m.freq;
+  document.getElementById('mDesc').value = m.desc || '';
+  document.getElementById('milestoneInputs').innerHTML = '';
+  (m.milestones || []).forEach(ms => addMilestoneInput(ms.text));
+  document.getElementById('deleteMissionBtn').style.display = 'block';
+  openModal('modalMission');
+}
+
+function addMilestoneInput(val = '') {
+  const div = document.createElement('div');
+  div.className = 'milestone-input-row';
+  div.innerHTML = `<input class="form-input" type="text" placeholder="Es. Prima bozza completata" value="${val}"><button class="remove-ms" onclick="this.parentElement.remove()">✕</button>`;
+  document.getElementById('milestoneInputs').appendChild(div);
+}
+
+function saveMission() {
+  const name = document.getElementById('mName').value.trim();
+  if (!name) { toast('Inserisci il nome della missione'); return; }
+  const cat = document.getElementById('mCat').value;
+  const freq = document.getElementById('mFreq').value;
+  const desc = document.getElementById('mDesc').value.trim();
+  const milestones = Array.from(document.querySelectorAll('#milestoneInputs .form-input'))
+    .map(i => i.value.trim()).filter(Boolean)
+    .map(text => ({ text, done: false }));
+
+  if (editingMissionId) {
+    const m = state.missions.find(m => m.id === editingMissionId);
+    if (m) {
+      m.name = name; m.cat = cat; m.freq = freq; m.desc = desc;
+      // merge milestones
+      const oldMs = m.milestones || [];
+      m.milestones = milestones.map((ms, i) => ({ ...ms, done: oldMs[i] ? oldMs[i].done : false }));
+    }
+  } else {
+    const id = 'm_' + Date.now();
+    state.missions.push({ id, name, cat, freq, desc, milestones, completed: false, timeLogs: [], reward: null, createdAt: new Date().toISOString() });
+    proposeRewards();
+  }
+
+  save();
+  closeModal('modalMission');
+  renderAll();
+  toast('Missione salvata ✓');
+}
+
+function deleteMission() {
+  if (!editingMissionId) return;
+  if (!confirm('Eliminare questa missione?')) return;
+  deleteMissionById(editingMissionId);
+  closeModal('modalMission');
+}
+
+function deleteMissionById(id) {
+  state.missions = state.missions.filter(m => m.id !== id);
+  delete state.timers[id];
+  save(); renderAll();
+  toast('Missione eliminata');
+}
+
+function toggleMilestone(missionId, idx) {
+  const m = state.missions.find(m => m.id === missionId);
+  if (!m || !m.milestones[idx]) return;
+  m.milestones[idx].done = !m.milestones[idx].done;
+  save(); renderAll();
+}
+
+function completeMission(id) {
+  const m = state.missions.find(m => m.id === id);
+  if (!m) return;
+  if (activeTimerMissionId === id) pauseTimer(id);
+  m.completed = true;
+  m.completedAt = new Date().toISOString();
+  const ci = getCycleInfo();
+  state.history.push({
+    id: m.id, name: m.name, reward: m.reward || 0,
+    date: new Date().toLocaleDateString('it-IT'),
+    cycle: ci.label
+  });
+  save(); renderAll();
+  showUnlock(m);
+}
+
+function uncomplete(id) {
+  const m = state.missions.find(m => m.id === id);
+  if (!m) return;
+  m.completed = false; m.completedAt = null;
+  state.history = state.history.filter(h => h.id !== id);
+  save(); renderAll();
+  toast('Missione riaperta');
+}
+
+function showUnlock(m) {
+  document.getElementById('unlockMissionName').textContent = m.name.toUpperCase();
+  document.getElementById('unlockAmount').textContent = `+€${m.reward || 0}`;
+  document.getElementById('unlockOverlay').classList.add('show');
+}
+function closeUnlock() { document.getElementById('unlockOverlay').classList.remove('show'); }
+
+function openTimeModal(id) {
+  const m = state.missions.find(m => m.id === id);
+  document.getElementById('timeModalName').textContent = m ? m.name : '';
+  document.getElementById('timeMinutes').value = '';
+  document.getElementById('timeDate').value = new Date().toISOString().split('T')[0];
+  document.getElementById('modalTime').dataset.missionId = id;
+  openModal('modalTime');
+}
+
+function saveTimeLog() {
+  const id = document.getElementById('modalTime').dataset.missionId;
+  const mins = parseInt(document.getElementById('timeMinutes').value);
+  const date = document.getElementById('timeDate').value || new Date().toISOString().split('T')[0];
+  if (!mins || mins < 1) { toast('Inserisci i minuti'); return; }
+  const m = state.missions.find(m => m.id === id);
+  if (!m) return;
+  if (!m.timeLogs) m.timeLogs = [];
+  m.timeLogs.push({ date, minutes: mins, auto: false });
+  save(); closeModal('modalTime'); renderAll();
+  toast(`${mins} minuti registrati ✓`);
+}
+
+function saveSettings() {
+  const b = parseInt(document.getElementById('settingBudget').value);
+  if (!b || b < 1) return;
+  state.settings.budget = b;
+  proposeRewards();
+  save(); renderAll();
+  toast('Configurazione salvata ✓');
+}
+
+function saveRewards() {
+  save(); renderAll();
+  toast('Distribuzione premi salvata ✓');
+}
+
+function exportData() {
+  const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `stellar_missions_${new Date().toISOString().split('T')[0]}.json`;
+  a.click();
+}
+
+function resetConfirm() {
+  if (confirm('Cancellare TUTTI i dati? Questa operazione è irreversibile.')) {
+    localStorage.removeItem('stellarMissions_v1');
+    state = { missions: [], settings: { budget: 340 }, history: [], timers: {} };
+    renderAll(); toast('Reset completato');
+  }
+}
+
+function toast(msg) {
+  const existing = document.querySelector('.toast');
+  if (existing) existing.remove();
+  const t = document.createElement('div');
+  t.className = 'toast'; t.textContent = msg;
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), 2900);
+}
+
+// ═══════════════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════════════
+load();
+
+// Restore any running timer
+Object.keys(state.timers).forEach(id => {
+  const t = state.timers[id];
+  if (t.running) {
+    activeTimerMissionId = id;
+    timerInterval = setInterval(tickTimer, 1000);
+  }
+});
+
+renderAll();
+
+// Refresh timer display every second even if not in active card
+setInterval(() => {
+  if (activeTimerMissionId) tickTimer();
+}, 1000);
+</script>
+</body>
+</html>
