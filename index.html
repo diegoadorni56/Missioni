@@ -9,151 +9,147 @@
 <title>STELLAR MISSIONS</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600&family=Share+Tech+Mono&display=swap');
-:root{--bg:#020812;--bg2:#060f1e;--bg3:#0a1628;--panel:#0d1f35;--panel2:#112240;--accent:#00d4ff;--accent2:#7b2fff;--accent3:#ff6b35;--gold:#ffd700;--green:#00ff88;--red:#ff3366;--orange:#ff9500;--purple:#c77dff;--text:#c8e0f4;--text2:#6a8fa8;--text3:#3a5a78;--border:#1a3a5c;--border2:#0f2a44;--glow:0 0 20px rgba(0,212,255,0.3);--glow-gold:0 0 20px rgba(255,215,0,0.4);--glow-purple:0 0 20px rgba(199,125,255,0.4)}
+:root{--bg:#020812;--bg2:#060f1e;--bg3:#0a1628;--panel:#0d1f35;--panel2:#112240;--accent:#00d4ff;--accent2:#7b2fff;--accent3:#ff6b35;--gold:#ffd700;--green:#00ff88;--red:#ff3366;--orange:#ff9500;--purple:#c77dff;--text:#c8e0f4;--text2:#6a8fa8;--text3:#3a5a78;--border:#1a3a5c;--border2:#0f2a44}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 body{background:var(--bg);color:var(--text);font-family:'Rajdhani',sans-serif;font-size:15px;min-height:100vh;overflow-x:hidden;padding-bottom:80px}
-#starfield{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden}
+#sf{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden}
 .star{position:absolute;background:white;border-radius:50%;animation:twinkle linear infinite}
 @keyframes twinkle{0%,100%{opacity:0.1}50%{opacity:0.8}}
 body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.03) 2px,rgba(0,0,0,0.03) 4px);pointer-events:none;z-index:9999}
-.header{position:sticky;top:0;z-index:100;background:linear-gradient(180deg,rgba(2,8,18,0.98),rgba(6,15,30,0.95));border-bottom:1px solid var(--border);padding:10px 16px;backdrop-filter:blur(20px)}
-.header-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.hdr{position:sticky;top:0;z-index:100;background:linear-gradient(180deg,rgba(2,8,18,0.98),rgba(6,15,30,0.95));border-bottom:1px solid var(--border);padding:10px 16px;backdrop-filter:blur(20px)}
+.hdr-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
 .logo{font-family:'Orbitron',monospace;font-size:15px;font-weight:900;letter-spacing:3px;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.cycle-badge{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--text2);background:var(--panel);border:1px solid var(--border);padding:3px 7px;border-radius:4px}
-.rank-bar{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:8px 12px;margin-bottom:7px;display:flex;align-items:center;gap:10px}
-.rank-icon{font-size:20px;flex-shrink:0}
-.rank-info{flex:1;min-width:0}
-.rank-name{font-family:'Orbitron',monospace;font-size:11px;font-weight:700;color:var(--purple);letter-spacing:1px}
-.rank-xp-sub{font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--text3);margin-top:1px}
-.rank-track{height:3px;background:var(--bg3);border-radius:2px;overflow:hidden;margin-top:4px}
-.rank-fill{height:100%;background:linear-gradient(90deg,var(--accent2),var(--purple));border-radius:2px;transition:width 0.8s ease}
-.rank-total{font-family:'Orbitron',monospace;font-size:12px;font-weight:700;color:var(--purple);text-shadow:var(--glow-purple);white-space:nowrap}
-.budget-bar{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:7px 12px;display:flex;align-items:center;gap:10px}
-.budget-label{font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--text2);letter-spacing:1px;white-space:nowrap}
-.budget-track{flex:1;height:5px;background:var(--bg3);border-radius:3px;overflow:hidden}
-.budget-fill{height:100%;background:linear-gradient(90deg,var(--accent2),var(--accent));border-radius:3px;transition:width 0.6s ease}
-.budget-amount{font-family:'Orbitron',monospace;font-size:12px;font-weight:700;color:var(--gold);white-space:nowrap}
-.budget-details{display:flex;margin-top:5px;border:1px solid var(--border2);border-radius:6px;overflow:hidden}
-.bd-item{flex:1;text-align:center;padding:5px 2px;border-right:1px solid var(--border2)}
-.bd-item:last-child{border-right:none}
-.bd-val{font-family:'Orbitron',monospace;font-size:11px;font-weight:700}
-.bd-label{font-family:'Share Tech Mono',monospace;font-size:7px;color:var(--text3);letter-spacing:1px;margin-top:1px;text-transform:uppercase}
+.cbadge{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--text2);background:var(--panel);border:1px solid var(--border);padding:3px 7px;border-radius:4px}
+.rkbar{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:8px 12px;margin-bottom:7px;display:flex;align-items:center;gap:10px}
+.rkico{font-size:20px;flex-shrink:0}
+.rkinf{flex:1;min-width:0}
+.rknm{font-family:'Orbitron',monospace;font-size:11px;font-weight:700;color:var(--purple);letter-spacing:1px}
+.rkxp{font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--text3);margin-top:1px}
+.rktr{height:3px;background:var(--bg3);border-radius:2px;overflow:hidden;margin-top:4px}
+.rkfl{height:100%;background:linear-gradient(90deg,var(--accent2),var(--purple));border-radius:2px;transition:width 0.8s ease}
+.rktot{font-family:'Orbitron',monospace;font-size:12px;font-weight:700;color:var(--purple);white-space:nowrap}
+.bdbar{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:7px 12px;display:flex;align-items:center;gap:10px}
+.bdlbl{font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--text2);letter-spacing:1px;white-space:nowrap}
+.bdtrk{flex:1;height:5px;background:var(--bg3);border-radius:3px;overflow:hidden}
+.bdfl{height:100%;background:linear-gradient(90deg,var(--accent2),var(--accent));border-radius:3px;transition:width 0.6s ease}
+.bdamt{font-family:'Orbitron',monospace;font-size:12px;font-weight:700;color:var(--gold);white-space:nowrap}
+.bddet{display:flex;margin-top:5px;border:1px solid var(--border2);border-radius:6px;overflow:hidden}
+.bdi{flex:1;text-align:center;padding:5px 2px;border-right:1px solid var(--border2)}
+.bdi:last-child{border-right:none}
+.bdiv{font-family:'Orbitron',monospace;font-size:11px;font-weight:700}
+.bdil{font-family:'Share Tech Mono',monospace;font-size:7px;color:var(--text3);letter-spacing:1px;margin-top:1px;text-transform:uppercase}
 .nav{position:fixed;bottom:0;left:0;right:0;z-index:100;background:rgba(2,8,18,0.97);border-top:1px solid var(--border);display:flex;backdrop-filter:blur(20px);padding-bottom:env(safe-area-inset-bottom)}
-.nav-btn{flex:1;padding:10px 4px 8px;border:none;background:transparent;color:var(--text3);font-family:'Rajdhani',sans-serif;font-size:10px;font-weight:600;letter-spacing:1px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;transition:color 0.2s;text-transform:uppercase}
-.nav-btn .ni{font-size:18px}
-.nav-btn.active{color:var(--accent)}
+.nb{flex:1;padding:10px 4px 8px;border:none;background:transparent;color:var(--text3);font-family:'Rajdhani',sans-serif;font-size:10px;font-weight:600;letter-spacing:1px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;transition:color 0.2s;text-transform:uppercase}
+.nb .ni{font-size:18px}
+.nb.active{color:var(--accent)}
 .view{display:none;padding:16px;position:relative;z-index:1}
 .view.active{display:block}
-.sec-title{font-family:'Orbitron',monospace;font-size:11px;font-weight:700;letter-spacing:3px;color:var(--text2);text-transform:uppercase;margin-bottom:12px;padding-bottom:6px;border-bottom:1px solid var(--border2);display:flex;align-items:center;gap:8px}
-.sec-title::before{content:'';display:block;width:3px;height:14px;background:var(--accent);border-radius:2px}
+.stit{font-family:'Orbitron',monospace;font-size:11px;font-weight:700;letter-spacing:3px;color:var(--text2);text-transform:uppercase;margin-bottom:12px;padding-bottom:6px;border-bottom:1px solid var(--border2);display:flex;align-items:center;gap:8px}
+.stit::before{content:'';display:block;width:3px;height:14px;background:var(--accent);border-radius:2px}
 .mc{background:var(--panel);border:1px solid var(--border);border-radius:10px;margin-bottom:12px;overflow:hidden;position:relative}
 .mc::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;border-radius:10px 0 0 10px}
-.mc.cat-asp::before{background:var(--accent)}
-.mc.cat-social::before{background:var(--accent2)}
-.mc.cat-1pct::before{background:var(--green)}
-.mc.done{opacity:0.6;border-color:var(--border2)}
-.mc.done::before{background:var(--text3)}
-.mc.exp{opacity:0.5;border-color:rgba(255,51,102,0.3)}
-.mc.exp::before{background:var(--red)}
-.mh{padding:12px 14px 10px 16px;display:flex;align-items:flex-start;justify-content:space-between;gap:8px;cursor:pointer}
-.mi{flex:1;min-width:0}
-.mn{font-family:'Orbitron',monospace;font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px;line-height:1.3}
-.mm{display:flex;gap:5px;flex-wrap:wrap;align-items:center}
+.mc.casp::before{background:var(--accent)}.mc.csoc::before{background:var(--accent2)}.mc.c1pc::before{background:var(--green)}
+.mc.isdone{opacity:0.6;border-color:var(--border2)}.mc.isdone::before{background:var(--text3)}
+.mc.isexp{opacity:0.5;border-color:rgba(255,51,102,0.3)}.mc.isexp::before{background:var(--red)}
+.mch{padding:12px 14px 10px 16px;display:flex;align-items:flex-start;justify-content:space-between;gap:8px;cursor:pointer}
+.mci{flex:1;min-width:0}
+.mcn{font-family:'Orbitron',monospace;font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px;line-height:1.3}
+.mcm{display:flex;gap:5px;flex-wrap:wrap;align-items:center}
 .tag{font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:1px;padding:2px 6px;border-radius:3px;text-transform:uppercase}
 .ta{background:rgba(0,212,255,0.1);color:var(--accent);border:1px solid rgba(0,212,255,0.2)}
-.ts{background:rgba(123,47,255,0.1);color:var(--accent2);border:1px solid rgba(123,47,255,0.2)}
-.tp{background:rgba(0,255,136,0.1);color:var(--green);border:1px solid rgba(0,255,136,0.2)}
-.tf{background:rgba(255,107,53,0.1);color:var(--accent3);border:1px solid rgba(255,107,53,0.2)}
-.td{background:rgba(199,125,255,0.1);color:var(--purple);border:1px solid rgba(199,125,255,0.2)}
-.mrc{text-align:right;flex-shrink:0}
-.mrw{font-family:'Orbitron',monospace;font-size:14px;font-weight:700;color:var(--gold)}
-.mxb{font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--purple);margin-top:2px}
+.tso{background:rgba(123,47,255,0.1);color:var(--accent2);border:1px solid rgba(123,47,255,0.2)}
+.t1p{background:rgba(0,255,136,0.1);color:var(--green);border:1px solid rgba(0,255,136,0.2)}
+.tfq{background:rgba(255,107,53,0.1);color:var(--accent3);border:1px solid rgba(255,107,53,0.2)}
+.tdf{background:rgba(199,125,255,0.1);color:var(--purple);border:1px solid rgba(199,125,255,0.2)}
+.mcr{text-align:right;flex-shrink:0}
+.mcrw{font-family:'Orbitron',monospace;font-size:14px;font-weight:700;color:var(--gold)}
+.mcxb{font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--purple);margin-top:2px}
 .mxp{padding:0 14px 10px 16px}
-.xpr{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
-.xpl{font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--text3);letter-spacing:1px}
-.xpv{font-family:'Orbitron',monospace;font-size:10px;font-weight:700}
-.xpv.g{color:var(--green)}.xpv.w{color:var(--orange)}.xpv.b{color:var(--red)}
-.xpt{height:4px;background:var(--bg3);border-radius:2px;overflow:hidden}
-.xpf{height:100%;border-radius:2px;transition:width 0.5s ease}
-.cat-asp .xpf{background:linear-gradient(90deg,#0088aa,var(--accent))}
-.cat-social .xpf{background:linear-gradient(90deg,#4a1aaa,var(--accent2))}
-.cat-1pct .xpf{background:linear-gradient(90deg,#00aa55,var(--green))}
-.done .xpf,.exp .xpf{background:var(--text3)}
-.md{display:none;padding:12px 14px;border-top:1px solid var(--border2);background:var(--bg2)}
-.md.open{display:block}
+.mxr{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
+.mxl{font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--text3);letter-spacing:1px}
+.mxv{font-family:'Orbitron',monospace;font-size:10px;font-weight:700}
+.mxv.g{color:var(--green)}.mxv.w{color:var(--orange)}.mxv.b{color:var(--red)}
+.mxt{height:4px;background:var(--bg3);border-radius:2px;overflow:hidden}
+.mxf{height:100%;border-radius:2px;transition:width 0.5s ease}
+.casp .mxf{background:linear-gradient(90deg,#0088aa,var(--accent))}
+.csoc .mxf{background:linear-gradient(90deg,#4a1aaa,var(--accent2))}
+.c1pc .mxf{background:linear-gradient(90deg,#00aa55,var(--green))}
+.isdone .mxf,.isexp .mxf{background:var(--text3)}
+.mdet{display:none;padding:12px 14px;border-top:1px solid var(--border2);background:var(--bg2)}
+.mdet.open{display:block}
 .dr{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border2);font-size:13px}
 .dr:last-child{border-bottom:none}
 .dk{color:var(--text2);font-weight:500}
 .dv{font-family:'Share Tech Mono',monospace;color:var(--text);font-size:12px;text-align:right;max-width:60%}
-.msl{margin:10px 0}
-.msl-lbl{font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--text3);letter-spacing:1px;margin-bottom:6px;text-transform:uppercase}
-.msi{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--border2);cursor:pointer}
-.msi:last-child{border-bottom:none}
-.msc{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--text3);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px;transition:all 0.2s}
-.msc.done{background:var(--green);border-color:var(--green);box-shadow:0 0 8px rgba(0,255,136,0.5)}
-.mslab{font-size:13px;color:var(--text);flex:1}
-.mslab.done{text-decoration:line-through;color:var(--text3)}
-.msdate{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--text3)}
+.mslst{margin:10px 0}
+.msltit{font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--text3);letter-spacing:1px;margin-bottom:6px;text-transform:uppercase}
+.msli{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--border2)}
+.msli:last-child{border-bottom:none}
+.mslc{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--text3);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px;transition:all 0.2s}
+.mslc.done{background:var(--green);border-color:var(--green);box-shadow:0 0 8px rgba(0,255,136,0.5)}
+.msllab{font-size:13px;color:var(--text);flex:1}
+.msllab.done{text-decoration:line-through;color:var(--text3)}
+.msldt{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--text3)}
 .ar{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
 .btn{font-family:'Orbitron',monospace;font-size:9px;font-weight:700;letter-spacing:1px;padding:8px 12px;border-radius:6px;border:none;cursor:pointer;text-transform:uppercase;transition:all 0.2s}
-.bp{background:linear-gradient(135deg,var(--accent2),var(--accent));color:white}
-.bp:active{transform:scale(0.97)}
-.bs{background:transparent;color:var(--accent3);border:1px solid var(--accent3)}
-.bd2{background:transparent;color:var(--red);border:1px solid var(--red)}
+.bpri{background:linear-gradient(135deg,var(--accent2),var(--accent));color:white}
+.bpri:active{transform:scale(0.97)}
+.bsec{background:transparent;color:var(--accent3);border:1px solid var(--accent3)}
+.bdng{background:transparent;color:var(--red);border:1px solid var(--red)}
 .bsuc{background:linear-gradient(135deg,#00aa55,var(--green));color:var(--bg)}
 .bsm{padding:5px 8px;font-size:8px}
-.td2{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:10px 12px;margin:10px 0;display:flex;align-items:center;justify-content:space-between}
-.tdg{font-family:'Orbitron',monospace;font-size:22px;font-weight:700;color:var(--accent);letter-spacing:2px}
-.tdg.run{color:var(--green)}
-.tdb{display:flex;gap:6px}
+.tmr{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:10px 12px;margin:10px 0;display:flex;align-items:center;justify-content:space-between}
+.tmrd{font-family:'Orbitron',monospace;font-size:22px;font-weight:700;color:var(--accent);letter-spacing:2px}
+.tmrd.run{color:var(--green)}
+.tmrb{display:flex;gap:6px}
 .mo{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(2,8,18,0.92);z-index:200;backdrop-filter:blur(10px);align-items:flex-start;justify-content:center;padding:20px;overflow-y:auto}
 .mo.open{display:flex}
 .mdl{background:var(--panel2);border:1px solid var(--border);border-radius:12px;width:100%;max-width:400px;box-shadow:0 0 60px rgba(0,212,255,0.15);margin:auto}
-.mdh{padding:16px 16px 12px;border-bottom:1px solid var(--border);font-family:'Orbitron',monospace;font-size:13px;font-weight:700;letter-spacing:2px;color:var(--accent);display:flex;justify-content:space-between;align-items:center}
-.mdc2{background:none;border:none;color:var(--text3);font-size:20px;cursor:pointer;padding:0 4px}
-.mdb{padding:16px}
+.mdlh{padding:16px 16px 12px;border-bottom:1px solid var(--border);font-family:'Orbitron',monospace;font-size:13px;font-weight:700;letter-spacing:2px;color:var(--accent);display:flex;justify-content:space-between;align-items:center}
+.mdlx{background:none;border:none;color:var(--text3);font-size:20px;cursor:pointer;padding:0 4px}
+.mdlb{padding:16px}
 .fg{margin-bottom:14px}
 .fl{display:block;font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--text2);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px}
-.fi,.fsel,.fta{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:6px;color:var(--text);font-family:'Rajdhani',sans-serif;font-size:15px;padding:10px 12px;outline:none;transition:border-color 0.2s;-webkit-appearance:none;appearance:none}
-.fi:focus,.fsel:focus,.fta:focus{border-color:var(--accent)}
+.fi,.fsl,.fta{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:6px;color:var(--text);font-family:'Rajdhani',sans-serif;font-size:15px;padding:10px 12px;outline:none;transition:border-color 0.2s;-webkit-appearance:none;appearance:none}
+.fi:focus,.fsl:focus,.fta:focus{border-color:var(--accent)}
 .fta{min-height:60px;resize:vertical}
 .fh{font-size:11px;color:var(--text3);margin-top:4px}
 .fh.warn{color:var(--orange)}.fh.ok{color:var(--green)}
-.dfs{display:flex;gap:8px;margin-top:6px}
-.dfs-star{font-size:24px;cursor:pointer;opacity:0.25;transition:all 0.15s;filter:grayscale(1)}
-.dfs-star.on{opacity:1;filter:none}
-.sp{background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.2);border-radius:8px;padding:10px 12px;margin-top:8px;font-size:12px;color:var(--text2);line-height:1.8;display:none}
-.sp strong{color:var(--accent);font-family:'Orbitron',monospace;font-size:11px}
-.xpp{background:rgba(199,125,255,0.08);border:1px solid rgba(199,125,255,0.2);border-radius:8px;padding:10px 12px;margin-top:8px;font-size:12px;color:var(--text2);line-height:1.8;display:none}
-.xpp strong{color:var(--purple);font-family:'Orbitron',monospace;font-size:11px}
-.bsc{background:linear-gradient(135deg,rgba(123,47,255,0.15),rgba(0,212,255,0.1));border:1px solid var(--accent2);border-radius:12px;padding:20px;text-align:center;margin-bottom:16px}
-.bst{font-family:'Orbitron',monospace;font-size:14px;font-weight:700;color:var(--accent2);letter-spacing:2px;margin-bottom:8px}
-.bss{font-size:13px;color:var(--text2);line-height:1.5}
+.dstar{display:flex;gap:8px;margin-top:6px}
+.dst{font-size:24px;cursor:pointer;opacity:0.25;transition:all 0.15s;filter:grayscale(1)}
+.dst.on{opacity:1;filter:none}
+.sprev{background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.2);border-radius:8px;padding:10px 12px;margin-top:8px;font-size:12px;color:var(--text2);line-height:1.8}
+.sprev strong{color:var(--accent);font-family:'Orbitron',monospace;font-size:11px}
+.xpprev{background:rgba(199,125,255,0.08);border:1px solid rgba(199,125,255,0.2);border-radius:8px;padding:10px 12px;margin-top:8px;font-size:12px;color:var(--text2);line-height:1.8}
+.xpprev strong{color:var(--purple);font-family:'Orbitron',monospace;font-size:11px}
+.bscard{background:linear-gradient(135deg,rgba(123,47,255,0.15),rgba(0,212,255,0.1));border:1px solid var(--accent2);border-radius:12px;padding:20px;text-align:center;margin-bottom:16px}
+.bsctit{font-family:'Orbitron',monospace;font-size:14px;font-weight:700;color:var(--accent2);letter-spacing:2px;margin-bottom:8px}
+.bscsub{font-size:13px;color:var(--text2);line-height:1.5}
 .sgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
-.sc{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:12px;text-align:center}
-.sv{font-family:'Orbitron',monospace;font-size:20px;font-weight:700;color:var(--accent)}
-.sl{font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--text3);letter-spacing:1px;margin-top:4px;text-transform:uppercase}
-.rshow{background:linear-gradient(135deg,rgba(199,125,255,0.1),rgba(123,47,255,0.1));border:1px solid rgba(199,125,255,0.3);border-radius:10px;padding:16px;margin-bottom:14px;text-align:center}
-.rsi{font-size:52px;margin-bottom:8px}
-.rsn{font-family:'Orbitron',monospace;font-size:16px;font-weight:900;color:var(--purple);text-shadow:var(--glow-purple);letter-spacing:2px}
-.rsx{font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--text2);margin-top:6px}
-.rst{height:8px;background:var(--bg3);border-radius:4px;overflow:hidden;margin-top:10px}
-.rsf{height:100%;background:linear-gradient(90deg,var(--accent2),var(--purple));border-radius:4px}
-.rsn2{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--text3);margin-top:6px}
-.susc{background:rgba(255,149,0,0.08);border:1px solid rgba(255,149,0,0.3);border-radius:10px;padding:14px;margin-bottom:14px}
-.sust{font-family:'Orbitron',monospace;font-size:11px;font-weight:700;color:var(--orange);letter-spacing:2px;margin-bottom:10px}
-.susi{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid rgba(255,149,0,0.15);font-size:12px}
-.susi:last-child{border-bottom:none}
-.susa{font-family:'Orbitron',monospace;font-size:13px;color:var(--orange)}
-.cc{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:14px;margin-bottom:14px}
-.ct{font-family:'Orbitron',monospace;font-size:11px;font-weight:700;color:var(--accent2);letter-spacing:2px;margin-bottom:10px}
-.hi{background:var(--panel);border:1px solid var(--border2);border-radius:8px;padding:10px 12px;margin-bottom:8px}
-.hitp{display:flex;justify-content:space-between;align-items:flex-start}
-.hn{font-size:13px;color:var(--text);font-weight:600}
-.hm{font-size:10px;color:var(--text3);margin-top:2px;font-family:'Share Tech Mono',monospace}
-.hr2{font-family:'Orbitron',monospace;font-size:14px;color:var(--gold);text-align:right}
-.hr2.lost{color:var(--red)}
-.hx{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--purple);margin-top:2px;text-align:right}
+.scard{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:12px;text-align:center}
+.sval{font-family:'Orbitron',monospace;font-size:20px;font-weight:700;color:var(--accent)}
+.slbl{font-family:'Share Tech Mono',monospace;font-size:9px;color:var(--text3);letter-spacing:1px;margin-top:4px;text-transform:uppercase}
+.rkshow{background:linear-gradient(135deg,rgba(199,125,255,0.1),rgba(123,47,255,0.1));border:1px solid rgba(199,125,255,0.3);border-radius:10px;padding:16px;margin-bottom:14px;text-align:center}
+.rksi{font-size:52px;margin-bottom:8px}
+.rksn{font-family:'Orbitron',monospace;font-size:16px;font-weight:900;color:var(--purple);letter-spacing:2px}
+.rksx{font-family:'Share Tech Mono',monospace;font-size:11px;color:var(--text2);margin-top:6px}
+.rkst{height:8px;background:var(--bg3);border-radius:4px;overflow:hidden;margin-top:10px}
+.rksf{height:100%;background:linear-gradient(90deg,var(--accent2),var(--purple));border-radius:4px}
+.rksn2{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--text3);margin-top:6px}
+.suspc{background:rgba(255,149,0,0.08);border:1px solid rgba(255,149,0,0.3);border-radius:10px;padding:14px;margin-bottom:14px}
+.suspt{font-family:'Orbitron',monospace;font-size:11px;font-weight:700;color:var(--orange);letter-spacing:2px;margin-bottom:10px}
+.suspi{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid rgba(255,149,0,0.15);font-size:12px}
+.suspi:last-child{border-bottom:none}
+.suspa{font-family:'Orbitron',monospace;font-size:13px;color:var(--orange)}
+.ccard{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:14px;margin-bottom:14px}
+.ctit{font-family:'Orbitron',monospace;font-size:11px;font-weight:700;color:var(--accent2);letter-spacing:2px;margin-bottom:10px}
+.hitem{background:var(--panel);border:1px solid var(--border2);border-radius:8px;padding:10px 12px;margin-bottom:8px}
+.hrow{display:flex;justify-content:space-between;align-items:flex-start}
+.hnm{font-size:13px;color:var(--text);font-weight:600}
+.hmt{font-size:10px;color:var(--text3);margin-top:2px;font-family:'Share Tech Mono',monospace}
+.hrw{font-family:'Orbitron',monospace;font-size:14px;color:var(--gold);text-align:right}
+.hrw.lost{color:var(--red)}
+.hxp{font-family:'Share Tech Mono',monospace;font-size:10px;color:var(--purple);margin-top:2px;text-align:right}
 .toast{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:var(--panel2);border:1px solid var(--accent);border-radius:8px;padding:10px 18px;z-index:300;font-family:'Orbitron',monospace;font-size:11px;color:var(--accent);animation:tIn 0.3s ease,tOut 0.3s ease 2.5s forwards;white-space:nowrap}
 @keyframes tIn{from{opacity:0;top:10px}to{opacity:1;top:20px}}
 @keyframes tOut{from{opacity:1}to{opacity:0}}
@@ -170,233 +166,280 @@ body::after{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:r
 .ulus{font-family:'Orbitron',monospace;font-size:15px;color:var(--orange);margin-top:6px}
 .ullost{font-family:'Orbitron',monospace;font-size:14px;color:var(--red);margin-top:4px}
 .empty{text-align:center;padding:40px 20px;color:var(--text3)}
-.empty .ei{font-size:48px;margin-bottom:12px}
 .fab{position:fixed;bottom:80px;right:20px;z-index:99;width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--accent2),var(--accent));border:none;color:white;font-size:24px;box-shadow:0 4px 20px rgba(0,212,255,0.4);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:transform 0.2s}
 .fab:active{transform:scale(0.93)}
-.divl{height:1px;background:var(--border2);margin:14px 0}
+.dvdr{height:1px;background:var(--border2);margin:14px 0}
 .ami{background:none;border:1px dashed var(--border);color:var(--text3);border-radius:6px;padding:6px 12px;font-size:12px;cursor:pointer;width:100%;margin-top:6px}
-.mir{display:flex;flex-direction:column;gap:8px}
-.mirr{display:flex;gap:6px;align-items:center}
-.mirr .fi{flex:1}
+.mirw{display:flex;gap:6px;align-items:center;margin-bottom:8px}
+.mirw .fi{flex:1}
 .rms{background:none;border:none;color:var(--red);font-size:18px;cursor:pointer;padding:4px}
 select option{background:#0d1f35}
 </style>
 </head>
 <body>
 <div id="sf"></div>
-<div class="header">
-  <div class="header-top"><div class="logo">STELLAR MISSIONS</div><div class="cycle-badge" id="cBadge">--</div></div>
-  <div class="rank-bar">
-    <div class="rank-icon" id="hRkIco">🌑</div>
-    <div class="rank-info">
-      <div class="rank-name" id="hRkNm">RECLUTA SPAZIALE</div>
-      <div class="rank-xp-sub" id="hRkXp">0 XP</div>
-      <div class="rank-track"><div class="rank-fill" id="hRkFill" style="width:0%"></div></div>
+<div class="hdr">
+  <div class="hdr-top"><div class="logo">STELLAR MISSIONS</div><div class="cbadge" id="cBadge">--</div></div>
+  <div class="rkbar">
+    <div class="rkico" id="hRkI">&#127761;</div>
+    <div class="rkinf">
+      <div class="rknm" id="hRkN">RECLUTA SPAZIALE</div>
+      <div class="rkxp" id="hRkX">0 XP</div>
+      <div class="rktr"><div class="rkfl" id="hRkF" style="width:0%"></div></div>
     </div>
-    <div class="rank-total" id="hRkTot">0 XP</div>
+    <div class="rktot" id="hRkT">0 XP</div>
   </div>
-  <div class="budget-bar">
-    <div class="budget-label">€</div>
-    <div class="budget-track"><div class="budget-fill" id="bFill" style="width:0%"></div></div>
-    <div class="budget-amount" id="bAmt">-- / --</div>
+  <div class="bdbar">
+    <div class="bdlbl">EUR</div>
+    <div class="bdtrk"><div class="bdfl" id="bdFl" style="width:0%"></div></div>
+    <div class="bdamt" id="bdAm">-- / --</div>
   </div>
-  <div class="budget-details">
-    <div class="bd-item"><div class="bd-val" id="bdB" style="color:var(--text2)">--</div><div class="bd-label">Budget</div></div>
-    <div class="bd-item"><div class="bd-val" id="bdI" style="color:var(--orange)">--</div><div class="bd-label">Impegnato</div></div>
-    <div class="bd-item"><div class="bd-val" id="bdL" style="color:var(--accent)">--</div><div class="bd-label">Libero</div></div>
-    <div class="bd-item"><div class="bd-val" id="bdG" style="color:var(--gold)">--</div><div class="bd-label">Guadagnato</div></div>
+  <div class="bddet">
+    <div class="bdi"><div class="bdiv" id="bdB" style="color:var(--text2)">--</div><div class="bdil">Budget</div></div>
+    <div class="bdi"><div class="bdiv" id="bdI" style="color:var(--orange)">--</div><div class="bdil">Impegnato</div></div>
+    <div class="bdi"><div class="bdiv" id="bdL" style="color:var(--accent)">--</div><div class="bdil">Libero</div></div>
+    <div class="bdi"><div class="bdiv" id="bdG" style="color:var(--gold)">--</div><div class="bdil">Guadagnato</div></div>
   </div>
 </div>
 <div id="view-missions" class="view active"><div id="mList"></div></div>
 <div id="view-stats" class="view">
-  <div class="sec-title">RANGO GALATTICO</div><div class="rshow" id="rShow"></div>
-  <div class="sec-title">STATISTICHE</div><div class="sgrid" id="sGrid"></div>
+  <div class="stit">RANGO GALATTICO</div><div class="rkshow" id="rkShow"></div>
+  <div class="stit">STATISTICHE</div><div class="sgrid" id="sGrid"></div>
   <div id="suspSec"></div>
-  <div class="sec-title">CICLO</div><div class="cc" id="cCard"></div>
-  <div class="sec-title">STORICO</div><div id="hList"></div>
+  <div class="stit">CICLO</div><div class="ccard" id="cCard"></div>
+  <div class="stit">STORICO</div><div id="hList"></div>
 </div>
 <div id="view-settings" class="view">
-  <div class="sec-title">CONFIGURAZIONE</div>
-  <div class="cc">
-    <div class="ct">BUDGET CICLO</div>
+  <div class="stit">CONFIGURAZIONE</div>
+  <div class="ccard">
+    <div class="ctit">BUDGET CICLO</div>
     <div class="fg" style="margin-bottom:10px">
-      <label class="fl">Budget questo ciclo (€)</label>
-      <input type="number" class="fi" id="sBudget" placeholder="Es. 340" min="1">
-      <div class="fh" id="sHint"></div>
+      <label class="fl">Budget questo ciclo (euro)</label>
+      <input type="number" class="fi" id="sBgt" placeholder="Es. 340" min="1">
+      <div class="fh" id="sHnt"></div>
     </div>
-    <button class="btn bp" onclick="saveSettings()">SALVA</button>
+    <button class="btn bpri" onclick="saveSettings()">SALVA</button>
   </div>
-  <div class="divl"></div>
-  <div class="sec-title">DATI</div>
+  <div class="dvdr"></div>
+  <div class="stit">DATI</div>
   <div style="display:flex;gap:8px;flex-wrap:wrap">
-    <button class="btn bs" onclick="exportData()">ESPORTA JSON</button>
-    <button class="btn bd2" onclick="resetConfirm()">RESET TOTALE</button>
+    <button class="btn bsec" onclick="exportData()">ESPORTA JSON</button>
+    <button class="btn bdng" onclick="resetConfirm()">RESET TOTALE</button>
   </div>
 </div>
 <nav class="nav">
-  <button class="nav-btn active" onclick="showView('missions',this)"><span class="ni">🚀</span>MISSIONI</button>
-  <button class="nav-btn" onclick="showView('stats',this)"><span class="ni">📡</span>STATO</button>
-  <button class="nav-btn" onclick="showView('settings',this)"><span class="ni">⚙️</span>CONFIG</button>
+  <button class="nb active" onclick="showView('missions',this)"><span class="ni">&#128640;</span>MISSIONI</button>
+  <button class="nb" onclick="showView('stats',this)"><span class="ni">&#128225;</span>STATO</button>
+  <button class="nb" onclick="showView('settings',this)"><span class="ni">&#9881;</span>CONFIG</button>
 </nav>
-<button class="fab" onclick="openNewMission()">＋</button>
-<div class="mo" id="moBudget">
+<button class="fab" onclick="openNewMission()">+</button>
+<div class="mo" id="moBgt">
   <div class="mdl">
-    <div class="mdh"><span id="bMTitle">NUOVO CICLO</span></div>
-    <div class="mdb">
-      <div class="bsc"><div class="bst">⚡ INIZIALIZZAZIONE CICLO</div><div class="bss" id="bMSub">Quanto è il tuo budget per questo ciclo?</div></div>
-      <div class="fg"><label class="fl">Budget base (€)</label><input type="number" class="fi" id="bInput" placeholder="Es. 340" min="1"></div>
-      <div id="sPrev" style="display:none;margin-bottom:12px"><div class="fh" style="color:var(--orange)" id="sPrevTxt"></div></div>
-      <button class="btn bp" style="width:100%;margin-top:8px" onclick="saveBudgetSetup()">CONFERMA BUDGET</button>
+    <div class="mdlh"><span id="bMT">NUOVO CICLO</span></div>
+    <div class="mdlb">
+      <div class="bscard"><div class="bsctit">INIZIALIZZAZIONE CICLO</div><div class="bscsub" id="bMS">Quanto e il tuo budget per questo ciclo?</div></div>
+      <div class="fg"><label class="fl">Budget base (euro)</label><input type="number" class="fi" id="bInp" placeholder="Es. 340" min="1"></div>
+      <div id="sPrv" style="display:none;margin-bottom:12px"><div class="fh" style="color:var(--orange)" id="sPrvT"></div></div>
+      <button class="btn bpri" style="width:100%;margin-top:8px" onclick="saveBudgetSetup()">CONFERMA BUDGET</button>
     </div>
   </div>
 </div>
-<div class="mo" id="moMission">
+<div class="mo" id="moMis">
   <div class="mdl">
-    <div class="mdh"><span id="mMTitle">NUOVA MISSIONE</span><button class="mdc2" onclick="closeModal('moMission')">✕</button></div>
-    <div class="mdb">
-      <div class="fg"><label class="fl">Nome Missione</label><input type="text" class="fi" id="mName" placeholder="Es. Regolamento ASP"></div>
+    <div class="mdlh"><span id="mMT">NUOVA MISSIONE</span><button class="mdlx" onclick="closeModal('moMis')">X</button></div>
+    <div class="mdlb">
+      <div class="fg"><label class="fl">Nome Missione</label><input type="text" class="fi" id="mNm" placeholder="Es. Regolamento ASP"></div>
       <div class="fg"><label class="fl">Categoria</label>
-        <select class="fsel" id="mCat">
-          <option value="asp">🏛 ASP Azalea — Lavoro</option>
-          <option value="social">🌐 Vita Sociale</option>
-          <option value="1pct">⚡ Incremento 1% Quotidiano</option>
+        <select class="fsl" id="mCat">
+          <option value="asp">ASP Azalea - Lavoro</option>
+          <option value="social">Vita Sociale</option>
+          <option value="1pct">Incremento 1% Quotidiano</option>
         </select>
       </div>
       <div class="fg">
-        <label class="fl">Difficoltà / Importanza</label>
-        <div class="dfs" id="dfsEl">
-          <span class="dfs-star" data-v="1" onclick="setDiff(1)">⭐</span>
-          <span class="dfs-star" data-v="2" onclick="setDiff(2)">⭐</span>
-          <span class="dfs-star" data-v="3" onclick="setDiff(3)">⭐</span>
-          <span class="dfs-star" data-v="4" onclick="setDiff(4)">⭐</span>
-          <span class="dfs-star" data-v="5" onclick="setDiff(5)">⭐</span>
+        <label class="fl">Difficolta / Importanza</label>
+        <div class="dstar" id="dstarEl">
+          <span class="dst" data-v="1" onclick="setDiff(1)">&#11088;</span>
+          <span class="dst" data-v="2" onclick="setDiff(2)">&#11088;</span>
+          <span class="dst" data-v="3" onclick="setDiff(3)">&#11088;</span>
+          <span class="dst" data-v="4" onclick="setDiff(4)">&#11088;</span>
+          <span class="dst" data-v="5" onclick="setDiff(5)">&#11088;</span>
         </div>
-        <div class="fh" id="dHint">Seleziona difficoltà</div>
+        <div class="fh" id="dHnt">Seleziona difficolta</div>
       </div>
       <div class="fg"><label class="fl">Tipo</label>
-        <select class="fsel" id="mType" onchange="onTypeChange()">
+        <select class="fsl" id="mTyp" onchange="onTypeChange()">
           <option value="oneshot">Obiettivo unico</option>
           <option value="recurring">Ricorrente giornaliera</option>
         </select>
       </div>
       <div class="fg"><label class="fl">Durata</label>
-        <select class="fsel" id="mFreq" onchange="onFreqChange()">
+        <select class="fsl" id="mFrq" onchange="onFreqChange()">
           <option value="weekly">Settimanale (7 giorni)</option>
           <option value="biweekly">Due settimane (14 giorni)</option>
           <option value="multiweek">Progetto (inserisci giorni)</option>
         </select>
       </div>
-      <div class="fg" id="cdg" style="display:none"><label class="fl">Numero di giorni</label><input type="number" class="fi" id="mCDays" placeholder="Es. 21" min="1" max="90" oninput="onFreqChange()"></div>
-      <div class="fg"><label class="fl">Descrizione (opzionale)</label><textarea class="fta" id="mDesc" placeholder="Obiettivo..."></textarea></div>
+      <div class="fg" id="cdg" style="display:none"><label class="fl">Numero di giorni</label><input type="number" class="fi" id="mCD" placeholder="Es. 21" min="1" max="90" oninput="onFreqChange()"></div>
+      <div class="fg"><label class="fl">Descrizione (opzionale)</label><textarea class="fta" id="mDsc" placeholder="Obiettivo..."></textarea></div>
       <div class="fg">
-        <label class="fl">Premio (€) <span id="bRHint" style="color:var(--text3);font-size:10px;font-family:'Share Tech Mono'"></span></label>
-        <input type="number" class="fi" id="mReward" placeholder="Es. 30" min="1" oninput="onRewardChange()">
-        <div class="fh" id="rHint"></div>
-        <div class="sp" id="sPrev2"></div>
-        <div class="xpp" id="xpPrev"></div>
+        <label class="fl">Premio (euro) <span id="bRH" style="color:var(--text3);font-size:10px;font-family:Share Tech Mono,monospace"></span></label>
+        <input type="number" class="fi" id="mRw" placeholder="Es. 30" min="1" oninput="onRewardChange()">
+        <div class="fh" id="rHnt"></div>
+        <div class="sprev" id="spEl" style="display:none"></div>
+        <div class="xpprev" id="xpEl" style="display:none"></div>
       </div>
       <div id="osMil">
-        <div class="fg"><label class="fl">Tappe intermedie</label><div class="mir" id="milIn"></div><button class="ami" onclick="addMilIn()">+ Aggiungi tappa</button></div>
+        <div class="fg"><label class="fl">Tappe intermedie</label><div id="milIn"></div><button class="ami" onclick="addMilIn()">+ Aggiungi tappa</button></div>
       </div>
       <div style="display:flex;gap:8px;margin-top:16px">
-        <button class="btn bp" style="flex:1" onclick="saveMission()">LANCIA MISSIONE</button>
-        <button class="btn bd2 bsm" id="delBtn" onclick="delMission()" style="display:none">ELIMINA</button>
+        <button class="btn bpri" style="flex:1" onclick="saveMission()">LANCIA MISSIONE</button>
+        <button class="btn bdng bsm" id="delBtn" onclick="delMission()" style="display:none">ELIMINA</button>
       </div>
     </div>
   </div>
 </div>
-<div class="mo" id="moTime">
+<div class="mo" id="moTm">
   <div class="mdl">
-    <div class="mdh"><span>LOG TEMPO</span><button class="mdc2" onclick="closeModal('moTime')">✕</button></div>
-    <div class="mdb">
-      <div class="fg"><label class="fl">Missione: <span id="tMName" style="color:var(--accent)"></span></label></div>
+    <div class="mdlh"><span>LOG TEMPO</span><button class="mdlx" onclick="closeModal('moTm')">X</button></div>
+    <div class="mdlb">
+      <div class="fg"><label class="fl">Missione: <span id="tMN" style="color:var(--accent)"></span></label></div>
       <div class="fg"><label class="fl">Minuti</label><input type="number" class="fi" id="tMin" placeholder="Es. 45" min="1"></div>
-      <div class="fg"><label class="fl">Data (vuoto=oggi)</label><input type="date" class="fi" id="tDate"></div>
-      <button class="btn bp" style="width:100%;margin-top:8px" onclick="saveTimeLog()">REGISTRA</button>
+      <div class="fg"><label class="fl">Data (vuoto=oggi)</label><input type="date" class="fi" id="tDt"></div>
+      <button class="btn bpri" style="width:100%;margin-top:8px" onclick="saveTimeLog()">REGISTRA</button>
     </div>
   </div>
 </div>
 <div class="ulo" id="uLo">
-  <div class="ulic" id="uIco">🏆</div>
-  <div class="ult" id="uTit">MISSIONE COMPLETATA</div>
+  <div class="ulic" id="uIc">&#127942;</div>
+  <div class="ult" id="uTt">MISSIONE COMPLETATA</div>
   <div class="uln" id="uNm"></div>
-  <div class="ula" id="uAmt">+€0</div>
-  <div class="ulx" id="uXp">+0 XP</div>
+  <div class="ula" id="uAm">+0 euro</div>
+  <div class="ulx" id="uXp"></div>
   <div class="ulru" id="uRU" style="display:none"></div>
-  <div class="ulus" id="uSusp" style="display:none"></div>
-  <div class="ullost" id="uLost" style="display:none"></div>
-  <button class="btn bsuc" style="margin-top:24px;font-size:11px;padding:10px 24px" onclick="closeUnlock()">INCASSA ✓</button>
+  <div class="ulus" id="uSu" style="display:none"></div>
+  <div class="ullost" id="uLo2" style="display:none"></div>
+  <button class="btn bsuc" style="margin-top:24px;font-size:11px;padding:10px 24px" onclick="closeUnlock()">INCASSA</button>
 </div>
 <script>
-const RANKS=[{name:'Recluta Spaziale',icon:'🌑',min:0,max:499},{name:'Esploratore',icon:'🌒',min:500,max:1499},{name:'Navigatore',icon:'🌓',min:1500,max:2999},{name:'Ufficiale',icon:'🌔',min:3000,max:5999},{name:'Capitano',icon:'⭐',min:6000,max:9999},{name:'Comandante',icon:'🌟',min:10000,max:19999},{name:'Ammiraglio',icon:'💫',min:20000,max:49999},{name:'Leggenda Galattica',icon:'🌌',min:50000,max:Infinity}];
-const XPB={1:50,2:100,3:200,4:350,5:500};
-function getRank(xp){for(let i=RANKS.length-1;i>=0;i--)if(xp>=RANKS[i].min)return{...RANKS[i],index:i};return{...RANKS[0],index:0};}
-function calcXpGain(diff,pct,daysEarly){const base=XPB[diff]||100;let m=pct;if(pct>=1)m+=0.5;else if(pct<0.75)m=Math.max(m-0.2,0);m+=Math.min(daysEarly*0.1,0.3);return Math.round(base*Math.max(m,0));}
-let state={missions:[],cycles:[],suspendedCredits:[],history:[],timers:{},lastBudgetPrompt:null,totalXp:0};
-let editId=null,curDiff=3,activeTimer=null,timerIv=null;
-function save(){try{localStorage.setItem('stellar_v3',JSON.stringify(state));}catch(e){}}
-function load(){try{const r=localStorage.getItem('stellar_v3');if(r)state={...state,...JSON.parse(r)};}catch(e){}['missions','cycles','suspendedCredits','history','timers'].forEach(k=>{if(!state[k])state[k]=k==='timers'?{}:[];});if(!state.totalXp)state.totalXp=0;}
-function getCycleInfo(date){const d=date||new Date(),day=d.getDate(),mo=d.getMonth(),yr=d.getFullYear();let cs,ce;if(day>=27){cs=new Date(yr,mo,27);ce=new Date(yr,mo+1,26);}else{cs=new Date(yr,mo-1,27);ce=new Date(yr,mo,26);}const td=Math.round((ce-cs)/86400000)+1,el=Math.max(1,Math.round((d-cs)/86400000)+1),fmt=dt=>`${String(dt.getDate()).padStart(2,'0')}/${String(dt.getMonth()+1).padStart(2,'0')}`,key=`${cs.getFullYear()}-${String(cs.getMonth()+1).padStart(2,'0')}-${String(cs.getDate()).padStart(2,'0')}`;return{cycleStart:cs,cycleEnd:ce,totalDays:td,elapsed:el,remaining:td-el+1,key,label:`${fmt(cs)} → ${fmt(ce)}`};}
-function curCI(){return getCycleInfo(new Date());}
-function curCD(){const ci=curCI();return state.cycles.find(c=>c.cycleKey===ci.key)||null;}
-function getDays(freq,cd){return freq==='weekly'?7:freq==='biweekly'?14:(parseInt(cd)||30);}
-function calcSplit(startDate,days){const s=new Date(startDate),e=new Date(s);e.setDate(e.getDate()+days-1);const ci=getCycleInfo(s);if(e<=ci.cycleEnd)return[{cycleKey:ci.key,days,fraction:1}];const di=Math.round((ci.cycleEnd-s)/86400000)+1,dn=days-di,cin=getCycleInfo(new Date(ci.cycleEnd.getTime()+86400000));return[{cycleKey:ci.key,days:di,fraction:di/days},{cycleKey:cin.key,days:dn,fraction:dn/days}];}
-function getBudgetNums(){const cd=curCD(),budget=cd?cd.budget:0,ci=curCI();const imp=state.missions.filter(m=>!m.completed&&!m.expired).reduce((sum,m)=>{const sp=(m.split||[]).find(x=>x.cycleKey===ci.key);return sum+(sp?Math.round((m.reward||0)*sp.fraction):(m.reward||0));},0);const earn=state.missions.filter(m=>m.completed).reduce((s,m)=>s+(m.earnedAmount||0),0);return{budget,impegnato:imp,guadagnato:earn,libero:Math.max(0,budget-imp-earn)};}
-function getBudgetFree(){return getBudgetNums().libero;}
-function checkBudgetPrompt(){const ci=curCI(),cd=curCD();if(!cd){showBudgetModal(ci);return true;}const today=new Date(),last=state.lastBudgetPrompt?new Date(state.lastBudgetPrompt):null;if(today.getDate()>=27&&(!last||last<ci.cycleStart)){showBudgetModal(ci);return true;}return false;}
-function showBudgetModal(ci){const ps=state.suspendedCredits.filter(s=>!s.addedToCycle),pt=ps.reduce((s,x)=>s+x.amount,0);document.getElementById('bMTitle').textContent=`CICLO ${ci.label}`;document.getElementById('bMSub').textContent='Quanto è il tuo budget base per questo ciclo?';if(pt>0){document.getElementById('sPrev').style.display='block';document.getElementById('sPrevTxt').textContent=`⚡ Verranno aggiunti €${pt} di crediti sospesi. Totale: €${pt} + budget inserito.`;}else{document.getElementById('sPrev').style.display='none';}document.getElementById('bInput').value='';openModal('moBudget');}
-function saveBudgetSetup(){const base=parseInt(document.getElementById('bInput').value);if(!base||base<1){toast('Inserisci un budget valido');return;}const ci=curCI(),ps=state.suspendedCredits.filter(s=>!s.addedToCycle),pt=ps.reduce((s,x)=>s+x.amount,0);ps.forEach(s=>s.addedToCycle=ci.key);const total=base+pt,ex=state.cycles.find(c=>c.cycleKey===ci.key);if(ex){ex.budget=total;ex.baseBudget=base;ex.suspendedIn=pt;}else{state.cycles.push({cycleKey:ci.key,label:ci.label,budget:total,baseBudget:base,suspendedIn:pt,startDate:ci.cycleStart.toISOString()});}state.lastBudgetPrompt=new Date().toISOString();save();closeModal('moBudget');renderAll();toast(`Budget: €${total} ✓`);}
-function today(){return new Date().toISOString().split('T')[0];}
-function fmtTime(ms){const ts=Math.floor(ms/1000),h=Math.floor(ts/3600),mn=Math.floor((ts%3600)/60),s=ts%60;return h>0?`${h}:${String(mn).padStart(2,'0')}:${String(s).padStart(2,'0')}`:`${String(mn).padStart(2,'0')}:${String(s).padStart(2,'0')}`;}
-function fmtMin(m){if(!m)return'0m';return m<60?`${m}m`:`${Math.floor(m/60)}h ${m%60}m`;}
-function getTotMin(id){const m=state.missions.find(m=>m.id===id);if(!m)return 0;const log=(m.timeLogs||[]).reduce((s,l)=>s+l.minutes,0),t=state.timers[id];if(t&&t.running)return log+Math.floor((Date.now()-t.startTs)/60000);return log+(t?Math.floor((t.accumulated||0)/60000):0);}
-function startTimer(id){if(!state.timers[id])state.timers[id]={running:false,startTs:0,accumulated:0};const t=state.timers[id];if(t.running)return;t.running=true;t.startTs=Date.now();activeTimer=id;save();tickTimer();timerIv=setInterval(tickTimer,1000);}
-function pauseTimer(id){const t=state.timers[id];if(!t||!t.running)return;t.accumulated+=Date.now()-t.startTs;t.running=false;clearInterval(timerIv);const mins=Math.floor(t.accumulated/60000);if(mins>0){const m=state.missions.find(m=>m.id===id);if(m){if(!m.timeLogs)m.timeLogs=[];m.timeLogs.push({date:today(),minutes:mins,auto:true});}t.accumulated=t.accumulated%60000;}activeTimer=null;save();renderAll();}
-function tickTimer(){if(!activeTimer)return;const t=state.timers[activeTimer];if(!t||!t.running)return;const el=Date.now()-t.startTs+(t.accumulated||0),e=document.querySelector(`[data-timer="${activeTimer}"]`);if(e){e.textContent=fmtTime(el);e.className='tdg run';}}
-function calcResult(m){const mt=(m.milestones||[]).length,md=(m.milestones||[]).filter(x=>x.done).length,pct=mt>0?md/mt:1,r=m.reward||0;if(pct>=0.5)return{earned:Math.floor(r*pct),suspended:r-Math.floor(r*pct),lost:0,pct};return{earned:0,suspended:0,lost:r,pct};}
-function completeMission(id){const m=state.missions.find(m=>m.id===id);if(!m)return;if(activeTimer===id)pauseTimer(id);const res=calcResult(m),ci=curCI(),mt=(m.milestones||[]).length,md=(m.milestones||[]).filter(x=>x.done).length,pct=mt>0?md/mt:1,ca=m.createdAt?new Date(m.createdAt):new Date(),du=Math.max(1,Math.round((new Date()-ca)/86400000)),de=Math.max(0,(m.durationDays||7)-du),xp=calcXpGain(m.difficulty||3,pct,de),pr=getRank(state.totalXp||0);state.totalXp=(state.totalXp||0)+xp;const nr=getRank(state.totalXp),ru=nr.index>pr.index;m.completed=true;m.completedAt=new Date().toISOString();m.earnedAmount=res.earned;m.xpGained=xp;if(res.suspended>0)state.suspendedCredits.push({fromMission:m.name,amount:res.suspended,fromCycle:ci.key,addedToCycle:null});state.history.push({id:m.id,name:m.name,earned:res.earned,suspended:res.suspended,lost:res.lost,pct:Math.round(res.pct*100),xp,diff:m.difficulty||3,date:new Date().toLocaleDateString('it-IT'),cycle:ci.label});save();renderAll();showUnlock(m,res,xp,ru?nr:null);}
-function expireMission(id){const m=state.missions.find(m=>m.id===id);if(!m)return;m.expired=true;m.expiredAt=new Date().toISOString();m.earnedAmount=0;const ci=curCI();state.history.push({id:m.id,name:m.name,earned:0,suspended:0,lost:m.reward||0,pct:0,xp:0,diff:1,date:new Date().toLocaleDateString('it-IT'),cycle:ci.label});save();renderAll();toast('Missione scaduta — premio perso');}
+var RANKS=[
+  {name:"Recluta Spaziale",icon:"🌑",min:0},
+  {name:"Esploratore",icon:"🌒",min:500},
+  {name:"Navigatore",icon:"🌓",min:1500},
+  {name:"Ufficiale",icon:"🌔",min:3000},
+  {name:"Capitano",icon:"⭐",min:6000},
+  {name:"Comandante",icon:"🌟",min:10000},
+  {name:"Ammiraglio",icon:"💫",min:20000},
+  {name:"Leggenda Galattica",icon:"🌌",min:50000}
+];
+var XPB={1:50,2:100,3:200,4:350,5:500};
+function getRank(xp){for(var i=RANKS.length-1;i>=0;i--)if(xp>=RANKS[i].min)return{r:RANKS[i],idx:i};return{r:RANKS[0],idx:0};}
+function calcXP(diff,pct,early){var base=XPB[diff]||100,m=pct;if(pct>=1)m+=0.5;else if(pct<0.75)m=Math.max(m-0.2,0);m+=Math.min(early*0.1,0.3);return Math.round(base*Math.max(m,0));}
+var ST={missions:[],cycles:[],susp:[],history:[],timers:{},lastBgt:null,totalXp:0};
+var editId=null,curDiff=3,activeTmr=null,tmrIv=null;
+function save(){try{localStorage.setItem("stellar_v3",JSON.stringify(ST));}catch(e){}}
+function load(){try{var r=localStorage.getItem("stellar_v3");if(r){var p=JSON.parse(r);ST=Object.assign(ST,p);}}catch(e){}if(!ST.missions)ST.missions=[];if(!ST.cycles)ST.cycles=[];if(!ST.susp)ST.susp=[];if(!ST.history)ST.history=[];if(!ST.timers)ST.timers={};if(!ST.totalXp)ST.totalXp=0;}
+function getCI(date){var d=date||new Date(),day=d.getDate(),mo=d.getMonth(),yr=d.getFullYear(),cs,ce;if(day>=27){cs=new Date(yr,mo,27);ce=new Date(yr,mo+1,26);}else{cs=new Date(yr,mo-1,27);ce=new Date(yr,mo,26);}var td=Math.round((ce-cs)/86400000)+1,el=Math.max(1,Math.round((d-cs)/86400000)+1),fmt=function(x){return String(x.getDate()).padStart(2,"0")+"/"+String(x.getMonth()+1).padStart(2,"0");},key=yr+"-"+String(cs.getMonth()+1).padStart(2,"0")+"-"+String(cs.getDate()).padStart(2,"0");return{cs:cs,ce:ce,td:td,el:el,rem:td-el+1,key:key,lbl:fmt(cs)+" > "+fmt(ce)};}
+function curCI(){return getCI(new Date());}
+function curCD(){var ci=curCI();return ST.cycles.find(function(c){return c.k===ci.key;})||null;}
+function getDays(freq,cd){return freq==="weekly"?7:freq==="biweekly"?14:(parseInt(cd)||30);}
+function calcSplit(sd,days){var s=new Date(sd),e=new Date(s);e.setDate(e.getDate()+days-1);var ci=getCI(s);if(e<=ci.ce)return [{k:ci.key,days:days,fr:1}];var di=Math.round((ci.ce-s)/86400000)+1,dn=days-di,cin=getCI(new Date(ci.ce.getTime()+86400000));return [{k:ci.key,days:di,fr:di/days},{k:cin.key,days:dn,fr:dn/days}];}
+function getBN(){var cd=curCD(),budget=cd?cd.bgt:0,ci=curCI();var imp=ST.missions.filter(function(m){return !m.done&&!m.exp;}).reduce(function(sum,m){var sp=(m.split||[]).find(function(s){return s.k===ci.key;});return sum+(sp?Math.round((m.rw||0)*sp.fr):(m.rw||0));},0);var earn=ST.missions.filter(function(m){return m.done;}).reduce(function(s,m){return s+(m.earned||0);},0);return {budget:budget,imp:imp,earn:earn,free:Math.max(0,budget-imp-earn)};}
+function getFree(){return getBN().free;}
+function checkBgtPrompt(){var ci=curCI(),cd=curCD();if(!cd){showBgtModal(ci);return true;}var t=new Date(),last=ST.lastBgt?new Date(ST.lastBgt):null;if(t.getDate()>=27&&(!last||last<ci.cs)){showBgtModal(ci);return true;}return false;}
+function showBgtModal(ci){var ps=ST.susp.filter(function(s){return !s.added;}),pt=ps.reduce(function(s,x){return s+x.amt;},0);el("bMT").textContent="CICLO "+ci.lbl;if(pt>0){el("sPrv").style.display="block";el("sPrvT").textContent="Verranno aggiunti "+pt+" euro di crediti sospesi. Totale: "+pt+" + budget inserito.";}else{el("sPrv").style.display="none";}el("bInp").value="";openModal("moBgt");}
+function saveBudgetSetup(){var base=parseInt(el("bInp").value);if(!base||base<1){toast("Inserisci un budget valido");return;}var ci=curCI(),ps=ST.susp.filter(function(s){return !s.added;}),pt=ps.reduce(function(s,x){return s+x.amt;},0);ps.forEach(function(s){s.added=ci.key;});var total=base+pt,ex=ST.cycles.find(function(c){return c.k===ci.key;});if(ex){ex.bgt=total;ex.base=base;ex.susp=pt;}else{ST.cycles.push({k:ci.key,lbl:ci.lbl,bgt:total,base:base,susp:pt,sd:ci.cs.toISOString()});}ST.lastBgt=new Date().toISOString();save();closeModal("moBgt");renderAll();toast("Budget: "+total+" euro");}
+function td(){return new Date().toISOString().split("T")[0];}
+function fmtT(ms){var ts=Math.floor(ms/1000),h=Math.floor(ts/3600),mn=Math.floor((ts%3600)/60),s=ts%60;return h>0?h+":"+String(mn).padStart(2,"0")+":"+String(s).padStart(2,"0"):String(mn).padStart(2,"0")+":"+String(s).padStart(2,"0");}
+function fmtM(m){if(!m)return"0m";return m<60?m+"m":Math.floor(m/60)+"h "+m%60+"m";}
+function getTM(id){var m=ST.missions.find(function(m){return m.id===id;});if(!m)return 0;var log=(m.tlog||[]).reduce(function(s,l){return s+l.m;},0),t=ST.timers[id];if(t&&t.run)return log+Math.floor((Date.now()-t.ts)/60000);return log+(t?Math.floor((t.acc||0)/60000):0);}
+function startTimer(id){if(!ST.timers[id])ST.timers[id]={run:false,ts:0,acc:0};var t=ST.timers[id];if(t.run)return;t.run=true;t.ts=Date.now();activeTmr=id;save();tickTimer();tmrIv=setInterval(tickTimer,1000);}
+function pauseTimer(id){var t=ST.timers[id];if(!t||!t.run)return;t.acc+=Date.now()-t.ts;t.run=false;clearInterval(tmrIv);var mins=Math.floor(t.acc/60000);if(mins>0){var m=ST.missions.find(function(m){return m.id===id;});if(m){if(!m.tlog)m.tlog=[];m.tlog.push({d:td(),m:mins,a:true});}t.acc=t.acc%60000;}activeTmr=null;save();renderAll();}
+function tickTimer(){if(!activeTmr)return;var t=ST.timers[activeTmr];if(!t||!t.run)return;var elapsed=Date.now()-t.ts+(t.acc||0),e=document.querySelector("[data-tmr='"+activeTmr+"']");if(e){e.textContent=fmtT(elapsed);e.className="tmrd run";}}
+function calcRes(m){var mt=(m.mil||[]).length,md=(m.mil||[]).filter(function(x){return x.dn;}).length,pct=mt>0?md/mt:1,r=m.rw||0;if(pct>=0.5)return{earn:Math.floor(r*pct),susp:r-Math.floor(r*pct),lost:0,pct:pct};return{earn:0,susp:0,lost:r,pct:pct};}
+function completeMission(id){var m=ST.missions.find(function(m){return m.id===id;});if(!m)return;if(activeTmr===id)pauseTimer(id);var res=calcRes(m),ci=curCI(),mt=(m.mil||[]).length,md=(m.mil||[]).filter(function(x){return x.dn;}).length,pct=mt>0?md/mt:1,ca=m.ca?new Date(m.ca):new Date(),du=Math.max(1,Math.round((new Date()-ca)/86400000)),de=Math.max(0,(m.dur||7)-du),xp=calcXP(m.diff||3,pct,de),pr=getRank(ST.totalXp||0);ST.totalXp=(ST.totalXp||0)+xp;var nr=getRank(ST.totalXp),ru=nr.idx>pr.idx;m.done=true;m.doneAt=new Date().toISOString();m.earned=res.earn;m.xpg=xp;if(res.susp>0)ST.susp.push({from:m.nm,amt:res.susp,fc:ci.key,added:null});ST.history.push({id:m.id,nm:m.nm,earn:res.earn,susp:res.susp,lost:res.lost,pct:Math.round(res.pct*100),xp:xp,diff:m.diff||3,dt:new Date().toLocaleDateString("it-IT"),cy:ci.lbl});save();renderAll();showUnlock(m,res,xp,ru?nr:null);}
+function expireMission(id){var m=ST.missions.find(function(m){return m.id===id;});if(!m)return;m.exp=true;m.expAt=new Date().toISOString();m.earned=0;var ci=curCI();ST.history.push({id:m.id,nm:m.nm,earn:0,susp:0,lost:m.rw||0,pct:0,xp:0,diff:1,dt:new Date().toLocaleDateString("it-IT"),cy:ci.lbl});save();renderAll();toast("Missione scaduta - premio perso");}
+function el(id){return document.getElementById(id);}
 function renderAll(){renderHeader();renderMissions();}
-function renderHeader(){const ci=curCI();document.getElementById('cBadge').textContent=ci.label;const rk=getRank(state.totalXp||0),nrk=RANKS[rk.index+1],rp=nrk?Math.round((state.totalXp-rk.min)/(nrk.min-rk.min)*100):100;document.getElementById('hRkIco').textContent=rk.icon;document.getElementById('hRkNm').textContent=rk.name.toUpperCase();document.getElementById('hRkXp').textContent=nrk?`${state.totalXp} / ${nrk.min} XP → ${nrk.name}`:'RANGO MASSIMO';document.getElementById('hRkFill').style.width=rp+'%';document.getElementById('hRkTot').textContent=`${state.totalXp} XP`;const{budget,impegnato,guadagnato,libero}=getBudgetNums(),ep=budget>0?Math.min(guadagnato/budget*100,100):0;document.getElementById('bFill').style.width=ep+'%';document.getElementById('bAmt').textContent=`€${guadagnato} / €${budget||'--'}`;document.getElementById('bdB').textContent=`€${budget||'--'}`;document.getElementById('bdI').textContent=`€${impegnato}`;document.getElementById('bdL').textContent=`€${libero}`;document.getElementById('bdG').textContent=`€${guadagnato}`;}
-function catCls(c){return{asp:'cat-asp',social:'cat-social','1pct':'cat-1pct'}[c]||'cat-asp';}
-function catTag(c){return{asp:['ta','ASP'],social:['ts','SOCIAL'],'1pct':['tp','1%']}[c]||['ta','?'];}
-function fqLbl(f){return{weekly:'7GG',biweekly:'14GG',multiweek:'PROG'}[f]||f;}
-function dStars(d){return'⭐'.repeat(d||1);}
-function renderMissions(){const act=state.missions.filter(m=>!m.completed&&!m.expired),dn=state.missions.filter(m=>m.completed),ex=state.missions.filter(m=>m.expired);let h='';if(!act.length&&!dn.length&&!ex.length){h='<div class="empty"><div class="ei">🛸</div><p>Nessuna missione.<br>Premi + per lanciarne una.</p></div>';}else{if(act.length)h+='<div class="sec-title">MISSIONI ATTIVE</div>'+act.map(mCard).join('');if(dn.length)h+='<div class="sec-title" style="margin-top:8px">COMPLETATE</div>'+dn.map(mCard).join('');if(ex.length)h+='<div class="sec-title" style="margin-top:8px">SCADUTE</div>'+ex.map(mCard).join('');}document.getElementById('mList').innerHTML=h;document.querySelectorAll('.mh').forEach(h=>{h.addEventListener('click',function(){const d=document.getElementById('det-'+this.dataset.id);if(d)d.classList.toggle('open');});});}
-function mCard(m){const mt=(m.milestones||[]).length,md=(m.milestones||[]).filter(x=>x.done).length,pct=mt>0?Math.round(md/mt*100):0,pc=pct>=50?'g':pct>0?'w':'b',t=state.timers[m.id],ir=t&&t.running,el=ir?Date.now()-t.startTs+(t.accumulated||0):(t?(t.accumulated||0):0),ci=curCI(),sp=(m.split||[]).find(s=>s.cycleKey===ci.key),rc=sp?Math.round((m.reward||0)*sp.fraction):(m.reward||0),[tc,tl]=catTag(m.cat),sc=m.completed?'done':m.expired?'exp':'';
-let msH='';if(mt>0)msH=`<div class="msl"><div class="msl-lbl">${m.missionType==='recurring'?'OCCORRENZE':'TAPPE'} — <span class="${pc}" style="font-family:'Orbitron',monospace;font-size:10px">${md}/${mt} (${pct}%)</span></div>${m.milestones.map((ms,i)=>`<div class="msi" onclick="${(!m.completed&&!m.expired)?`toggleMs('${m.id}',${i})`:''}"><div class="msc ${ms.done?'done':''}">✓</div><div class="mslab ${ms.done?'done':''}">${ms.text}</div>${ms.doneAt?`<div class="msdate">${ms.doneAt}</div>`:''}</div>`).join('')}</div>`;
-let rwStr=(m.split||[]).length>1?`€${rc}<span style="font-size:9px;color:var(--text3)"> ciclo</span>`:`€${m.reward||0}`;
-return`<div class="mc ${catCls(m.cat)} ${sc}"><div class="mh" data-id="${m.id}"><div class="mi"><div class="mn">${m.name}</div><div class="mm"><span class="tag ${tc}">${tl}</span><span class="tag tf">${fqLbl(m.freq)}</span><span class="tag td">${dStars(m.difficulty)}</span>${mt>0?`<span style="font-size:10px;color:var(--text3)">${md}/${mt}</span>`:''}</div></div><div class="mrc"><div class="mrw">${rwStr}</div><div class="mxb">${m.xpGained?`+${m.xpGained}XP`:''}</div></div></div><div class="mxp"><div class="xpr"><span class="xpl">${mt>0?`TAPPE ${md}/${mt}`:'OBIETTIVO'}</span><span class="xpv ${pc}">${pct}%</span></div><div class="xpt"><div class="xpf" style="width:${pct}%"></div></div></div><div class="md" id="det-${m.id}">${m.desc?`<div class="dr"><span class="dk">Obiettivo</span><span class="dv" style="font-family:'Rajdhani';font-size:13px">${m.desc}</span></div>`:''}<div class="dr"><span class="dk">Premio</span><span class="dv" style="color:var(--gold)">€${m.reward||0}</span></div><div class="dr"><span class="dk">Difficoltà</span><span class="dv">${dStars(m.difficulty||1)}</span></div><div class="dr"><span class="dk">Tempo</span><span class="dv">${fmtMin(getTotMin(m.id))}</span></div>${msH}${!m.completed&&!m.expired?`<div class="td2"><div class="tdg ${ir?'run':''}" data-timer="${m.id}">${fmtTime(el)}</div><div class="tdb">${ir?`<button class="btn bs bsm" onclick="pauseTimer('${m.id}')">⏸ PAUSA</button>`:`<button class="btn bp bsm" onclick="startTimer('${m.id}')">▶ START</button>`}</div></div><div class="ar"><button class="btn bs bsm" onclick="openTimeModal('${m.id}')">+ TEMPO</button><button class="btn bsuc bsm" onclick="completeMission('${m.id}')">🏆 COMPLETA</button><button class="btn bd2 bsm" onclick="expireMission('${m.id}')">💀 SCADUTA</button><button class="btn bs bsm" onclick="editMission('${m.id}')">✎</button></div>`:''}${m.completed?`<div class="ar"><div style="font-size:12px;color:var(--green)">✓ €${m.earnedAmount||0} · +${m.xpGained||0}XP</div><button class="btn bd2 bsm" onclick="delMissionById('${m.id}')">🗑</button></div>`:''}${m.expired?`<div class="ar"><div style="font-size:12px;color:var(--red)">Perso: €${m.reward||0}</div><button class="btn bd2 bsm" onclick="delMissionById('${m.id}')">🗑</button></div>`:''}`,`</div></div>`.slice(2);}`
-function renderStats(){const ci=curCI(),cd=curCD(),{budget,impegnato,guadagnato,libero}=getBudgetNums(),tm=state.missions.reduce((s,m)=>s+getTotMin(m.id),0),dn=state.missions.filter(m=>m.completed).length;const rk=getRank(state.totalXp||0),nrk=RANKS[rk.index+1],rp=nrk?Math.round((state.totalXp-rk.min)/(nrk.min-rk.min)*100):100;document.getElementById('rShow').innerHTML=`<div class="rsi">${rk.icon}</div><div class="rsn">${rk.name.toUpperCase()}</div><div class="rsx">${state.totalXp||0} XP totali</div><div class="rst"><div class="rsf" style="width:${rp}%"></div></div><div class="rsn2">${nrk?`${rp}% verso ${nrk.icon} ${nrk.name} (${nrk.min} XP)`:'⚡ RANGO MASSIMO'}</div>`;document.getElementById('sGrid').innerHTML=`<div class="sc"><div class="sv" style="color:var(--gold)">€${guadagnato}</div><div class="sl">Guadagnato</div></div><div class="sc"><div class="sv" style="color:var(--purple)">${state.totalXp||0}</div><div class="sl">XP Totali</div></div><div class="sc"><div class="sv" style="color:var(--green)">${dn}</div><div class="sl">Completate</div></div><div class="sc"><div class="sv">${fmtMin(tm)}</div><div class="sl">Tempo Tot.</div></div>`;const ps=state.suspendedCredits.filter(s=>!s.addedToCycle),se=document.getElementById('suspSec');if(ps.length>0){const pt=ps.reduce((s,x)=>s+x.amount,0);se.innerHTML=`<div class="sec-title">CREDITI SOSPESI</div><div class="susc"><div class="sust">⏳ Disponibili al prossimo 27</div>${ps.map(s=>`<div class="susi"><span style="color:var(--text2)">${s.fromMission}</span><span class="susa">€${s.amount}</span></div>`).join('')}<div class="susi" style="border-top:1px solid rgba(255,149,0,0.3);padding-top:8px;margin-top:4px"><span style="font-weight:700">TOTALE</span><span class="susa" style="font-size:16px">€${pt}</span></div></div>`;}else{se.innerHTML='';}document.getElementById('cCard').innerHTML=`<div class="ct">CICLO ${ci.label}</div><div class="dr"><span class="dk">Giorni trascorsi</span><span class="dv">${ci.elapsed} / ${ci.totalDays}</span></div><div class="dr"><span class="dk">Giorni rimasti</span><span class="dv">${ci.remaining}</span></div><div class="dr"><span class="dk">Budget</span><span class="dv" style="color:var(--text2)">€${budget}</span></div><div class="dr"><span class="dk">Impegnato</span><span class="dv" style="color:var(--orange)">€${impegnato}</span></div><div class="dr"><span class="dk">Libero</span><span class="dv" style="color:var(--accent)">€${libero}</span></div><div class="dr"><span class="dk">Guadagnato</span><span class="dv" style="color:var(--gold)">€${guadagnato}</span></div>${cd&&cd.suspendedIn>0?`<div class="dr"><span class="dk">Sospesi prev.</span><span class="dv" style="color:var(--orange)">€${cd.suspendedIn}</span></div>`:''}`; const hl=document.getElementById('hList');if(!state.history.length){hl.innerHTML='<div style="color:var(--text3);font-size:12px">Nessuna missione completata ancora.</div>';return;}hl.innerHTML=state.history.slice().reverse().map(h=>`<div class="hi"><div class="hitp"><div><div class="hn">${h.name}</div><div class="hm">${h.date} · ${h.cycle} · ${h.pct}% · ${dStars(h.diff||1)}</div>${h.suspended>0?`<div style="font-size:10px;color:var(--orange)">+€${h.suspended} sospesi</div>`:''}</div><div><div class="hr2 ${h.earned===0?'lost':''}">${h.earned>0?`+€${h.earned}`:h.lost>0?`−€${h.lost}`:'€0'}</div><div class="hx">+${h.xp||0} XP</div></div></div></div>`).join('');}
-function renderSettings(){const cd=curCD();document.getElementById('sBudget').value=cd?cd.budget:'';const ps=state.suspendedCredits.filter(s=>!s.addedToCycle),pt=ps.reduce((s,x)=>s+x.amount,0);document.getElementById('sHint').textContent=pt>0?`⚡ €${pt} sospesi da aggiungere al prossimo ciclo`:'`';}
-function setDiff(v){curDiff=v;document.querySelectorAll('.dfs-star').forEach(s=>s.classList.toggle('on',parseInt(s.dataset.v)<=v));const lb={1:'Semplice',2:'Normale',3:'Impegnativo',4:'Difficile',5:'Epico'};document.getElementById('dHint').textContent=`${lb[v]} — Base ${XPB[v]} XP`;onRewardChange();}
-function openNewMission(){const cd=curCD();if(!cd){toast('Prima configura il budget in CONFIG');return;}editId=null;document.getElementById('mMTitle').textContent='NUOVA MISSIONE';['mName','mDesc','mReward'].forEach(id=>document.getElementById(id).value='');document.getElementById('mCat').value='asp';document.getElementById('mType').value='oneshot';document.getElementById('mFreq').value='weekly';document.getElementById('milIn').innerHTML='';document.getElementById('delBtn').style.display='none';document.getElementById('cdg').style.display='none';document.getElementById('sPrev2').style.display='none';document.getElementById('xpPrev').style.display='none';document.getElementById('rHint').textContent='';curDiff=3;setDiff(3);updBRHint();onTypeChange();openModal('moMission');}
-function updBRHint(){document.getElementById('bRHint').textContent=`— Disponibile: €${getBudgetFree()}`;}
-function onTypeChange(){document.getElementById('osMil').style.display=document.getElementById('mType').value==='recurring'?'none':'block';onFreqChange();}
-function onFreqChange(){document.getElementById('cdg').style.display=document.getElementById('mFreq').value==='multiweek'?'block':'none';onRewardChange();}
-function onRewardChange(){const rw=parseInt(document.getElementById('mReward').value)||0,freq=document.getElementById('mFreq').value,days=getDays(freq,document.getElementById('mCDays').value),av=getBudgetFree(),h=document.getElementById('rHint');if(rw>av&&av>0){h.textContent=`⚠ Supera il disponibile (€${av})`;h.className='fh warn';}else if(rw>0){h.textContent=`✓ Residuo dopo: €${av-rw}`;h.className='fh ok';}else{h.textContent='';}const sp=calcSplit(new Date().toISOString(),days),s2=document.getElementById('sPrev2');if(sp.length>1&&rw>0){s2.style.display='block';s2.innerHTML=`<strong>⚡ MULTI-CICLO</strong><br>`+sp.map(s=>`Ciclo ${s.cycleKey.substring(5)}: ${s.days}gg → <strong>€${Math.round(rw*s.fraction)}</strong>`).join('<br>');}else{s2.style.display='none';}const xp2=document.getElementById('xpPrev');xp2.style.display='block';xp2.innerHTML=`<strong>⭐ XP POTENZIALI</strong><br>Base: <strong>${XPB[curDiff]} XP</strong> · Max (100%+velocità): <strong>${Math.round(XPB[curDiff]*1.8)} XP</strong>`;}
-function addMilIn(val=''){const d=document.createElement('div');d.className='mirr';d.innerHTML=`<input class="fi" type="text" placeholder="Es. Prima bozza completata" value="${val}"><button class="rms" onclick="this.parentElement.remove()">✕</button>`;document.getElementById('milIn').appendChild(d);}
-function editMission(id){const m=state.missions.find(m=>m.id===id);if(!m)return;editId=id;document.getElementById('mMTitle').textContent='MODIFICA MISSIONE';document.getElementById('mName').value=m.name;document.getElementById('mCat').value=m.cat;document.getElementById('mType').value=m.missionType||'oneshot';document.getElementById('mFreq').value=m.freq;document.getElementById('mDesc').value=m.desc||'';document.getElementById('mReward').value=m.reward||'';document.getElementById('milIn').innerHTML='';if(m.missionType!=='recurring')(m.milestones||[]).forEach(ms=>addMilIn(ms.text));document.getElementById('delBtn').style.display='block';curDiff=m.difficulty||3;setDiff(curDiff);onTypeChange();updBRHint();openModal('moMission');}
-function saveMission(){const name=document.getElementById('mName').value.trim();if(!name){toast('Inserisci il nome');return;}const rw=parseInt(document.getElementById('mReward').value);if(!rw||rw<1){toast('Inserisci il premio in €');return;}const av=getBudgetFree();if(!editId&&rw>av&&!confirm(`Premio (€${rw}) supera il disponibile (€${av}). Continuare?`))return;const cat=document.getElementById('mCat').value,mt=document.getElementById('mType').value,freq=document.getElementById('mFreq').value,days=getDays(freq,document.getElementById('mCDays').value),desc=document.getElementById('mDesc').value.trim(),sd=new Date().toISOString(),split=calcSplit(sd,days);let mil;if(mt==='recurring'){mil=Array.from({length:days},(_,i)=>{const d=new Date();d.setDate(d.getDate()+i);return{text:d.toLocaleDateString('it-IT',{weekday:'short',day:'2-digit',month:'2-digit'}),done:false,doneAt:null};});}else{mil=Array.from(document.querySelectorAll('#milIn .fi')).map(i=>i.value.trim()).filter(Boolean).map(t=>({text:t,done:false,doneAt:null}));}if(editId){const m=state.missions.find(m=>m.id===editId);if(m){Object.assign(m,{name,cat,missionType:mt,freq,reward:rw,desc,split,difficulty:curDiff,durationDays:days});if(mt!=='recurring')m.milestones=mil.map((ms,i)=>({...ms,done:(m.milestones||[])[i]?.done||false,doneAt:(m.milestones||[])[i]?.doneAt||null}));}}else{state.missions.push({id:'m_'+Date.now(),name,cat,missionType:mt,freq,reward:rw,desc,split,difficulty:curDiff,durationDays:days,milestones:mil,completed:false,expired:false,timeLogs:[],createdAt:sd});}save();closeModal('moMission');renderAll();toast('Missione salvata ✓');}
-function delMission(){if(!editId)return;if(!confirm('Eliminare?'))return;delMissionById(editId);closeModal('moMission');}
-function delMissionById(id){state.missions=state.missions.filter(m=>m.id!==id);delete state.timers[id];save();renderAll();toast('Eliminata');}
-function toggleMs(id,i){const m=state.missions.find(m=>m.id===id);if(!m||!m.milestones[i])return;m.milestones[i].done=!m.milestones[i].done;m.milestones[i].doneAt=m.milestones[i].done?today():null;save();renderAll();}
-function showUnlock(m,res,xp,nr){document.getElementById('uNm').textContent=m.name.toUpperCase();if(res.earned>0){document.getElementById('uIco').textContent='🏆';document.getElementById('uTit').textContent='MISSIONE COMPLETATA';document.getElementById('uAmt').textContent=`+€${res.earned}`;document.getElementById('uAmt').style.color='var(--gold)';}else{document.getElementById('uIco').textContent='💀';document.getElementById('uTit').textContent='PREMIO PERSO';document.getElementById('uAmt').textContent='€0';document.getElementById('uAmt').style.color='var(--red)';}document.getElementById('uXp').textContent=xp>0?`+${xp} XP`:'';const ru=document.getElementById('uRU');if(nr){ru.style.display='block';ru.textContent=`🎖 NUOVO RANGO: ${nr.icon} ${nr.name.toUpperCase()}`;}else ru.style.display='none';const su=document.getElementById('uSusp');if(res.suspended>0){su.style.display='block';su.textContent=`⏳ €${res.suspended} sospesi → prossimo ciclo`;}else su.style.display='none';const lo=document.getElementById('uLost');if(res.lost>0){lo.style.display='block';lo.textContent=`❌ €${res.lost} persi definitivamente`;}else lo.style.display='none';document.getElementById('uLo').classList.add('show');}
-function closeUnlock(){document.getElementById('uLo').classList.remove('show');}
-function openTimeModal(id){const m=state.missions.find(m=>m.id===id);document.getElementById('tMName').textContent=m?m.name:'';document.getElementById('tMin').value='';document.getElementById('tDate').value=today();document.getElementById('moTime').dataset.mid=id;openModal('moTime');}
-function saveTimeLog(){const id=document.getElementById('moTime').dataset.mid,mins=parseInt(document.getElementById('tMin').value),date=document.getElementById('tDate').value||today();if(!mins||mins<1){toast('Inserisci i minuti');return;}const m=state.missions.find(m=>m.id===id);if(!m)return;if(!m.timeLogs)m.timeLogs=[];m.timeLogs.push({date,minutes:mins,auto:false});save();closeModal('moTime');renderAll();toast(`${mins} minuti registrati ✓`);}
-function saveSettings(){const b=parseInt(document.getElementById('sBudget').value);if(!b||b<1)return;const ci=curCI(),ex=state.cycles.find(c=>c.cycleKey===ci.key);if(ex){ex.budget=b;}else{state.cycles.push({cycleKey:ci.key,label:ci.label,budget:b,baseBudget:b,suspendedIn:0,startDate:ci.cycleStart.toISOString()});}state.lastBudgetPrompt=new Date().toISOString();save();renderAll();toast('Salvato ✓');}
-function exportData(){const bl=new Blob([JSON.stringify(state,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(bl);a.download=`stellar_${today()}.json`;a.click();}
-function resetConfirm(){if(confirm('Cancellare TUTTI i dati?')){localStorage.removeItem('stellar_v3');state={missions:[],cycles:[],suspendedCredits:[],history:[],timers:{},lastBudgetPrompt:null,totalXp:0};renderAll();checkBudgetPrompt();toast('Reset completato');}}
-function showView(n,b){document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));document.querySelectorAll('.nav-btn').forEach(x=>x.classList.remove('active'));document.getElementById('view-'+n).classList.add('active');b.classList.add('active');if(n==='stats')renderStats();if(n==='settings')renderSettings();}
-function openModal(id){document.getElementById(id).classList.add('open');}
-function closeModal(id){document.getElementById(id).classList.remove('open');}
-function toast(msg){const ex=document.querySelector('.toast');if(ex)ex.remove();const t=document.createElement('div');t.className='toast';t.textContent=msg;document.body.appendChild(t);setTimeout(()=>t.remove(),2900);}
-(function(){const sf=document.getElementById('sf');for(let i=0;i<80;i++){const s=document.createElement('div');s.className='star';const sz=Math.random()*2+0.5;s.style.cssText=`width:${sz}px;height:${sz}px;left:${Math.random()*100}%;top:${Math.random()*100}%;animation-duration:${2+Math.random()*4}s;animation-delay:${Math.random()*4}s`;sf.appendChild(s);}})();
+function renderHeader(){var ci=curCI();el("cBadge").textContent=ci.lbl;var rk=getRank(ST.totalXp||0),nrk=RANKS[rk.idx+1],rp=nrk?Math.round((ST.totalXp-rk.r.min)/(nrk.min-rk.r.min)*100):100;el("hRkI").textContent=rk.r.icon;el("hRkN").textContent=rk.r.name.toUpperCase();el("hRkX").textContent=nrk?ST.totalXp+" / "+nrk.min+" XP verso "+nrk.name:"RANGO MASSIMO";el("hRkF").style.width=rp+"%";el("hRkT").textContent=ST.totalXp+" XP";var bn=getBN();el("bdFl").style.width=(bn.budget>0?Math.min(bn.earn/bn.budget*100,100):0)+"%";el("bdAm").textContent="Guad. "+bn.earn+" / "+bn.budget+" euro";el("bdB").textContent=bn.budget||"--";el("bdI").textContent=bn.imp;el("bdL").textContent=bn.free;el("bdG").textContent=bn.earn;}
+function catCls(c){return{asp:"casp",social:"csoc","1pct":"c1pc"}[c]||"casp";}
+function catTag(c){return{asp:["ta","ASP"],social:["tso","SOC"],"1pct":["t1p","1%"]}[c]||["ta","?"];}
+function fqL(f){return{weekly:"7GG",biweekly:"14GG",multiweek:"PROG"}[f]||f;}
+function dSt(d){var s="";for(var i=0;i<(d||1);i++)s+="*";return s;}
+function renderMissions(){var act=ST.missions.filter(function(m){return !m.done&&!m.exp;}),dn=ST.missions.filter(function(m){return m.done;}),ex=ST.missions.filter(function(m){return m.exp;});var h="";if(!act.length&&!dn.length&&!ex.length){h='<div class="empty"><div style="font-size:48px;margin-bottom:12px">&#128640;</div><p>Nessuna missione.<br>Premi + per lanciarne una.</p></div>';}else{if(act.length)h+='<div class="stit">MISSIONI ATTIVE</div>'+act.map(mCard).join("");if(dn.length)h+='<div class="stit" style="margin-top:8px">COMPLETATE</div>'+dn.map(mCard).join("");if(ex.length)h+='<div class="stit" style="margin-top:8px">SCADUTE</div>'+ex.map(mCard).join("");}el("mList").innerHTML=h;document.querySelectorAll(".mch").forEach(function(h){h.addEventListener("click",function(){var d=el("det-"+this.dataset.id);if(d)d.classList.toggle("open");});});}
+function mCard(m){
+  var mt=(m.mil||[]).length,md=(m.mil||[]).filter(function(x){return x.dn;}).length;
+  var pct=mt>0?Math.round(md/mt*100):0,pc=pct>=50?"g":pct>0?"w":"b";
+  var t=ST.timers[m.id],ir=t&&t.run,elapsed=ir?Date.now()-t.ts+(t.acc||0):(t?(t.acc||0):0);
+  var ci=curCI(),sp=(m.split||[]).find(function(s){return s.k===ci.key;}),rc=sp?Math.round((m.rw||0)*sp.fr):(m.rw||0);
+  var tc=catTag(m.cat),sc=m.done?"isdone":m.exp?"isexp":"";
+  var rwStr=(m.split||[]).length>1?"€"+rc+" (ciclo)":" €"+(m.rw||0);
+  var msH="";
+  if(mt>0){
+    msH='<div class="mslst"><div class="msltit">'+(m.typ==="recurring"?"OCCORRENZE":"TAPPE")+' - '+md+'/'+mt+' ('+pct+'%)</div>';
+    (m.mil||[]).forEach(function(ms,i){
+      var clickable=(!m.done&&!m.exp)?'onclick="toggleMs(''+m.id+'','+i+')"':'';
+      msH+='<div class="msli" '+clickable+'><div class="mslc '+(ms.dn?"done":"")+'">'+(ms.dn?"&#10003;":"")+'</div><div class="msllab '+(ms.dn?"done":"")+'">'+ms.tx+'</div>'+(ms.dt?'<div class="msldt">'+ms.dt+'</div>':'')+'</div>';
+    });
+    msH+='</div>';
+  }
+  var actH="";
+  if(!m.done&&!m.exp){
+    actH='<div class="tmr"><div class="tmrd '+(ir?"run":"")+'" data-tmr="'+m.id+'">'+fmtT(elapsed)+'</div><div class="tmrb">'+(ir?'<button class="btn bsec bsm" onclick="pauseTimer(''+m.id+'')">PAUSA</button>':'<button class="btn bpri bsm" onclick="startTimer(''+m.id+'')">START</button>')+'</div></div>';
+    actH+='<div class="ar"><button class="btn bsec bsm" onclick="openTM(''+m.id+'')">+TEMPO</button>';
+    actH+='<button class="btn bsuc bsm" onclick="completeMission(''+m.id+'')">COMPLETA</button>';
+    actH+='<button class="btn bdng bsm" onclick="expireMission(''+m.id+'')">SCADUTA</button>';
+    actH+='<button class="btn bsec bsm" onclick="editMission(''+m.id+'')">MODIFICA</button></div>';
+  }
+  if(m.done)actH='<div class="ar"><div style="font-size:12px;color:var(--green)">Guadagnato: euro '+(m.earned||0)+' · +'+(m.xpg||0)+'XP</div><button class="btn bdng bsm" onclick="delById(''+m.id+'')">ELIMINA</button></div>';
+  if(m.exp)actH='<div class="ar"><div style="font-size:12px;color:var(--red)">Perso: euro '+(m.rw||0)+'</div><button class="btn bdng bsm" onclick="delById(''+m.id+'')">ELIMINA</button></div>';
+  var h='<div class="mc '+catCls(m.cat)+' '+sc+'">';
+  h+='<div class="mch" data-id="'+m.id+'">';
+  h+='<div class="mci"><div class="mcn">'+m.nm+'</div><div class="mcm"><span class="tag '+tc[0]+'">'+tc[1]+'</span><span class="tag tfq">'+fqL(m.freq)+'</span><span class="tag tdf">'+dSt(m.diff)+'</span>'+(mt>0?'<span style="font-size:10px;color:var(--text3)">'+md+'/'+mt+'</span>':'')+'</div></div>';
+  h+='<div class="mcr"><div class="mcrw">'+rwStr+'</div><div class="mcxb">'+(m.xpg?"+"+m.xpg+"XP":"")+'</div></div></div>';
+  h+='<div class="mxp"><div class="mxr"><span class="mxl">'+(mt>0?"TAPPE "+md+"/"+mt:"OBIETTIVO")+'</span><span class="mxv '+pc+'">'+pct+'%</span></div><div class="mxt"><div class="mxf" style="width:'+pct+'%"></div></div></div>';
+  h+='<div class="mdet" id="det-'+m.id+'">';
+  if(m.dsc)h+='<div class="dr"><span class="dk">Obiettivo</span><span class="dv" style="font-family:Rajdhani,sans-serif;font-size:13px">'+m.dsc+'</span></div>';
+  h+='<div class="dr"><span class="dk">Premio</span><span class="dv" style="color:var(--gold)">euro '+(m.rw||0)+'</span></div>';
+  h+='<div class="dr"><span class="dk">Difficolta</span><span class="dv">'+dSt(m.diff||1)+' ('+m.diff+'★)</span></div>';
+  h+='<div class="dr"><span class="dk">Tempo</span><span class="dv">'+fmtM(getTM(m.id))+'</span></div>';
+  h+=msH+actH+'</div></div>';
+  return h;
+}
+function renderStats(){var ci=curCI(),cd=curCD(),bn=getBN(),tm=ST.missions.reduce(function(s,m){return s+getTM(m.id);},0),dn=ST.missions.filter(function(m){return m.done;}).length;var rk=getRank(ST.totalXp||0),nrk=RANKS[rk.idx+1],rp=nrk?Math.round((ST.totalXp-rk.r.min)/(nrk.min-rk.r.min)*100):100;el("rkShow").innerHTML='<div class="rksi">'+rk.r.icon+'</div><div class="rksn">'+rk.r.name.toUpperCase()+'</div><div class="rksx">'+ST.totalXp+' XP totali</div><div class="rkst"><div class="rksf" style="width:'+rp+'%"></div></div><div class="rksn2">'+(nrk?rp+"% verso "+nrk.icon+" "+nrk.name+" ("+nrk.min+" XP)":"RANGO MASSIMO")+'</div>';el("sGrid").innerHTML='<div class="scard"><div class="sval" style="color:var(--gold)">euro '+bn.earn+'</div><div class="slbl">Guadagnato</div></div><div class="scard"><div class="sval" style="color:var(--purple)">'+(ST.totalXp||0)+'</div><div class="slbl">XP Totali</div></div><div class="scard"><div class="sval" style="color:var(--green)">'+dn+'</div><div class="slbl">Completate</div></div><div class="scard"><div class="sval">'+fmtM(tm)+'</div><div class="slbl">Tempo Tot.</div></div>';var ps=ST.susp.filter(function(s){return !s.added;}),se=el("suspSec");if(ps.length>0){var pt=ps.reduce(function(s,x){return s+x.amt;},0);var sh='<div class="stit">CREDITI SOSPESI</div><div class="suspc"><div class="suspt">In attesa del prossimo 27</div>';ps.forEach(function(s){sh+='<div class="suspi"><span style="color:var(--text2)">'+s.from+'</span><span class="suspa">euro '+s.amt+'</span></div>';});sh+='<div class="suspi" style="border-top:1px solid rgba(255,149,0,0.3);padding-top:8px;margin-top:4px"><span style="font-weight:700">TOTALE</span><span class="suspa" style="font-size:16px">euro '+pt+'</span></div></div>';se.innerHTML=sh;}else{se.innerHTML="";}el("cCard").innerHTML='<div class="ctit">CICLO '+ci.lbl+'</div><div class="dr"><span class="dk">Giorni trascorsi</span><span class="dv">'+ci.el+' / '+ci.td+'</span></div><div class="dr"><span class="dk">Giorni rimasti</span><span class="dv">'+ci.rem+'</span></div><div class="dr"><span class="dk">Budget</span><span class="dv" style="color:var(--text2)">euro '+bn.budget+'</span></div><div class="dr"><span class="dk">Impegnato</span><span class="dv" style="color:var(--orange)">euro '+bn.imp+'</span></div><div class="dr"><span class="dk">Libero</span><span class="dv" style="color:var(--accent)">euro '+bn.free+'</span></div><div class="dr"><span class="dk">Guadagnato</span><span class="dv" style="color:var(--gold)">euro '+bn.earn+'</span></div>'+(cd&&cd.susp>0?'<div class="dr"><span class="dk">Sospesi prev.</span><span class="dv" style="color:var(--orange)">euro '+cd.susp+'</span></div>':"");var hl=el("hList");if(!ST.history.length){hl.innerHTML='<div style="color:var(--text3);font-size:12px">Nessuna missione completata ancora.</div>';return;}var hh="";ST.history.slice().reverse().forEach(function(h){hh+='<div class="hitem"><div class="hrow"><div><div class="hnm">'+h.nm+'</div><div class="hmt">'+h.dt+' · '+h.cy+' · '+h.pct+'%</div>'+(h.susp>0?'<div style="font-size:10px;color:var(--orange)">sospesi: euro '+h.susp+'</div>':'')+'</div><div><div class="hrw '+(h.earn===0?"lost":"")+'">'+( h.earn>0?"+euro "+h.earn:h.lost>0?"-euro "+h.lost:"euro 0")+'</div><div class="hxp">+'+( h.xp||0)+' XP</div></div></div></div>';});hl.innerHTML=hh;}
+function renderSettings(){var cd=curCD();el("sBgt").value=cd?cd.bgt:"";var ps=ST.susp.filter(function(s){return !s.added;}),pt=ps.reduce(function(s,x){return s+x.amt;},0);el("sHnt").textContent=pt>0?"Sospesi da aggiungere al prossimo ciclo: euro "+pt:"";}
+function setDiff(v){curDiff=v;document.querySelectorAll(".dst").forEach(function(s){s.classList.toggle("on",parseInt(s.dataset.v)<=v);});var lb={1:"Semplice",2:"Normale",3:"Impegnativo",4:"Difficile",5:"Epico"};el("dHnt").textContent=lb[v]+" - Base "+XPB[v]+" XP";onRewardChange();}
+function updBRH(){el("bRH").textContent="Disponibile: euro "+getFree();}
+function openNewMission(){var cd=curCD();if(!cd){toast("Prima configura il budget in CONFIG");return;}editId=null;el("mMT").textContent="NUOVA MISSIONE";el("mNm").value="";el("mCat").value="asp";el("mTyp").value="oneshot";el("mFrq").value="weekly";el("mDsc").value="";el("mRw").value="";el("milIn").innerHTML="";el("delBtn").style.display="none";el("cdg").style.display="none";el("spEl").style.display="none";el("xpEl").style.display="none";el("rHnt").textContent="";curDiff=3;setDiff(3);updBRH();onTypeChange();openModal("moMis");}
+function onTypeChange(){el("osMil").style.display=el("mTyp").value==="recurring"?"none":"block";onFreqChange();}
+function onFreqChange(){el("cdg").style.display=el("mFrq").value==="multiweek"?"block":"none";onRewardChange();}
+function onRewardChange(){var rw=parseInt(el("mRw").value)||0,freq=el("mFrq").value,days=getDays(freq,el("mCD").value),av=getFree(),h=el("rHnt");if(rw>av&&av>0){h.textContent="Supera il disponibile (euro "+av+")";h.className="fh warn";}else if(rw>0){h.textContent="Residuo dopo: euro "+(av-rw);h.className="fh ok";}else{h.textContent="";}var sp=calcSplit(new Date().toISOString(),days),s2=el("spEl");if(sp.length>1&&rw>0){s2.style.display="block";var st="PROGETTO MULTI-CICLO
+";sp.forEach(function(s){st+=s.k.substring(5)+": "+s.days+"gg = euro "+Math.round(rw*s.fr)+"
+";});s2.innerHTML=st.replace(/
+/g,"<br>");}else{s2.style.display="none";}var xp2=el("xpEl");xp2.style.display="block";xp2.innerHTML="XP POTENZIALI: base "+XPB[curDiff]+" / max circa "+Math.round(XPB[curDiff]*1.8);}
+function addMilIn(val){var v=val||"",d=document.createElement("div");d.className="mirw";d.innerHTML='<input class="fi" type="text" placeholder="Es. Prima bozza completata" value="'+v+'"><button class="rms" onclick="this.parentElement.remove()">X</button>';el("milIn").appendChild(d);}
+function editMission(id){var m=ST.missions.find(function(m){return m.id===id;});if(!m)return;editId=id;el("mMT").textContent="MODIFICA MISSIONE";el("mNm").value=m.nm;el("mCat").value=m.cat;el("mTyp").value=m.typ||"oneshot";el("mFrq").value=m.freq;el("mDsc").value=m.dsc||"";el("mRw").value=m.rw||"";el("milIn").innerHTML="";if(m.typ!=="recurring")(m.mil||[]).forEach(function(ms){addMilIn(ms.tx);});el("delBtn").style.display="block";curDiff=m.diff||3;setDiff(curDiff);onTypeChange();updBRH();openModal("moMis");}
+function saveMission(){var nm=el("mNm").value.trim();if(!nm){toast("Inserisci il nome");return;}var rw=parseInt(el("mRw").value);if(!rw||rw<1){toast("Inserisci il premio in euro");return;}var av=getFree();if(!editId&&rw>av&&!confirm("Premio (euro "+rw+") supera il disponibile (euro "+av+"). Continuare?"))return;var cat=el("mCat").value,typ=el("mTyp").value,freq=el("mFrq").value,days=getDays(freq,el("mCD").value),dsc=el("mDsc").value.trim(),sd=new Date().toISOString(),split=calcSplit(sd,days);var mil;if(typ==="recurring"){mil=[];for(var i=0;i<days;i++){var d=new Date();d.setDate(d.getDate()+i);mil.push({tx:d.toLocaleDateString("it-IT",{weekday:"short",day:"2-digit",month:"2-digit"}),dn:false,dt:null});}}else{mil=[];document.querySelectorAll("#milIn .fi").forEach(function(inp){var v=inp.value.trim();if(v)mil.push({tx:v,dn:false,dt:null});});}if(editId){var m=ST.missions.find(function(m){return m.id===editId;});if(m){m.nm=nm;m.cat=cat;m.typ=typ;m.freq=freq;m.rw=rw;m.dsc=dsc;m.split=split;m.diff=curDiff;m.dur=days;if(typ!=="recurring"){var old=m.mil||[];m.mil=mil.map(function(ms,i){return {tx:ms.tx,dn:old[i]?old[i].dn:false,dt:old[i]?old[i].dt:null};});}}}else{ST.missions.push({id:"m_"+Date.now(),nm:nm,cat:cat,typ:typ,freq:freq,rw:rw,dsc:dsc,split:split,diff:curDiff,dur:days,mil:mil,done:false,exp:false,tlog:[],ca:sd});}save();closeModal("moMis");renderAll();toast("Missione salvata");}
+function delMission(){if(!editId)return;if(!confirm("Eliminare?"))return;delById(editId);closeModal("moMis");}
+function delById(id){ST.missions=ST.missions.filter(function(m){return m.id!==id;});delete ST.timers[id];save();renderAll();toast("Eliminata");}
+function toggleMs(id,i){var m=ST.missions.find(function(m){return m.id===id;});if(!m||!m.mil[i])return;m.mil[i].dn=!m.mil[i].dn;m.mil[i].dt=m.mil[i].dn?td():null;save();renderAll();}
+function showUnlock(m,res,xp,nr){el("uNm").textContent=m.nm.toUpperCase();if(res.earn>0){el("uIc").textContent="🏆";el("uTt").textContent="MISSIONE COMPLETATA";el("uAm").textContent="+euro "+res.earn;el("uAm").style.color="var(--gold)";}else{el("uIc").textContent="💀";el("uTt").textContent="PREMIO PERSO";el("uAm").textContent="euro 0";el("uAm").style.color="var(--red)";}el("uXp").textContent=xp>0?"+"+xp+" XP":"";var ru=el("uRU");if(nr){ru.style.display="block";ru.textContent="NUOVO RANGO: "+nr.r.icon+" "+nr.r.name.toUpperCase();}else ru.style.display="none";var su=el("uSu");if(res.susp>0){su.style.display="block";su.textContent="Sospesi: euro "+res.susp+" al prossimo ciclo";}else su.style.display="none";var lo=el("uLo2");if(res.lost>0){lo.style.display="block";lo.textContent="Persi definitivamente: euro "+res.lost;}else lo.style.display="none";el("uLo").classList.add("show");}
+function closeUnlock(){el("uLo").classList.remove("show");}
+function openTM(id){var m=ST.missions.find(function(m){return m.id===id;});el("tMN").textContent=m?m.nm:"";el("tMin").value="";el("tDt").value=td();el("moTm").dataset.mid=id;openModal("moTm");}
+function saveTimeLog(){var id=el("moTm").dataset.mid,mins=parseInt(el("tMin").value),date=el("tDt").value||td();if(!mins||mins<1){toast("Inserisci i minuti");return;}var m=ST.missions.find(function(m){return m.id===id;});if(!m)return;if(!m.tlog)m.tlog=[];m.tlog.push({d:date,m:mins,a:false});save();closeModal("moTm");renderAll();toast(mins+" minuti registrati");}
+function saveSettings(){var b=parseInt(el("sBgt").value);if(!b||b<1)return;var ci=curCI(),ex=ST.cycles.find(function(c){return c.k===ci.key;});if(ex){ex.bgt=b;}else{ST.cycles.push({k:ci.key,lbl:ci.lbl,bgt:b,base:b,susp:0,sd:ci.cs.toISOString()});}ST.lastBgt=new Date().toISOString();save();renderAll();toast("Salvato");}
+function exportData(){var bl=new Blob([JSON.stringify(ST,null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(bl);a.download="stellar_"+td()+".json";a.click();}
+function resetConfirm(){if(confirm("Cancellare TUTTI i dati?")){localStorage.removeItem("stellar_v3");ST={missions:[],cycles:[],susp:[],history:[],timers:{},lastBgt:null,totalXp:0};renderAll();checkBgtPrompt();toast("Reset completato");}}
+function showView(n,b){document.querySelectorAll(".view").forEach(function(v){v.classList.remove("active");});document.querySelectorAll(".nb").forEach(function(x){x.classList.remove("active");});el("view-"+n).classList.add("active");b.classList.add("active");if(n==="stats")renderStats();if(n==="settings")renderSettings();}
+function openModal(id){el(id).classList.add("open");}
+function closeModal(id){el(id).classList.remove("open");}
+function toast(msg){var ex=document.querySelector(".toast");if(ex)ex.remove();var t=document.createElement("div");t.className="toast";t.textContent=msg;document.body.appendChild(t);setTimeout(function(){t.remove();},2900);}
+(function(){var sf=el("sf");for(var i=0;i<80;i++){var s=document.createElement("div");s.className="star";var sz=Math.random()*2+0.5;s.style.cssText="width:"+sz+"px;height:"+sz+"px;left:"+Math.random()*100+"%;top:"+Math.random()*100+"%;animation-duration:"+(2+Math.random()*4)+"s;animation-delay:"+Math.random()*4+"s";sf.appendChild(s);}})();
 load();
-Object.keys(state.timers).forEach(id=>{const t=state.timers[id];if(t&&t.running){activeTimer=id;timerIv=setInterval(tickTimer,1000);}});
-renderAll();checkBudgetPrompt();
-setInterval(()=>{if(activeTimer)tickTimer();},1000);
+Object.keys(ST.timers).forEach(function(id){var t=ST.timers[id];if(t&&t.run){activeTmr=id;tmrIv=setInterval(tickTimer,1000);}});
+renderAll();
+checkBgtPrompt();
+setInterval(function(){if(activeTmr)tickTimer();},1000);
 </script>
 </body>
 </html>
